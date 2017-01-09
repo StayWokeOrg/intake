@@ -1,7 +1,7 @@
 function User(opts) {
-  for (var key in opts) {
-    this[key] = opts;
-  }
+  Object.keys(opts).forEach(function (e, index, keys) {
+    this[e] = opts[e];
+  }, this);
 }
 
 User.prototype.insertNewUser = function insertNewUser() {
