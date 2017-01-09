@@ -5,6 +5,7 @@ body {
 }
 @media only screen and (max-width: 640px) {
     body {
+        min-width: 310px;
         padding: 5px;
     }
 }
