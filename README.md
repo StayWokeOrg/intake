@@ -4,6 +4,7 @@ The goal: to capture the contact information for as many people who are attendin
 
 ## Getting started
 
+- `cp example_dot_env .env`
 - `npm install`
 - `npm start`
 - `open http://localhost:3030`
