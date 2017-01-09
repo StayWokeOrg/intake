@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run installstyles && serve ./public --port 3030",
-    "installstyles": "cp ./node_modules/normalize.css/normalize.css ./public/"
+    "start": "serve ./public --port 3030"
   },
   "repository": {
     "type": "git",
