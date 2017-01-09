@@ -21,8 +21,5 @@
   "homepage": "https://github.com/stayworkorg/intake#readme",
   "devDependencies": {
     "serve": "^2.1.2"
-  },
-  "dependencies": {
-    "normalize.css": "^5.0.0"
   }
 }
