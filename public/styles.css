@@ -31,27 +31,7 @@ section.page {
     color: black;
     max-width: 640px;
     margin: 0 auto;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     padding: 20px;
-}
-
-.intake fieldset {
-    margin-bottom: 15px;
-}
-
-.intake label {
-    display: block;
-}
-.intake input {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.intake button {
-    display: block;
-}
-
-.intake button:hover {
-    opacity: 1;
 }
