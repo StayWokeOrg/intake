@@ -1,0 +1,61 @@
+body {
+    background-color: green;
+    padding: 50px;
+    color: white;
+}
+@media only screen and (max-width: 640px) {
+    body {
+        padding: 5px;
+    }
+}
+
+.text {
+    font-family: Georgia, serif;
+}
+
+.header {
+    padding: 10px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.intake {
+    color: black;
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+.intake fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.intake label {
+    display: block;
+    padding: 3px;
+}
+.intake input {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 24px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.intake button {
+    display: block;
+    font-size: 24px;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    color: white;
+    padding: 10px;
+    font-weight: normal;
+    margin-top: 10px;
+}

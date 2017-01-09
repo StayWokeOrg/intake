@@ -1,0 +1,28 @@
+{
+  "name": "intake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run installstyles && serve ./public --port 3030",
+    "installstyles": "cp ./node_modules/normalize.css/normalize.css ./public/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stayworkorg/intake.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stayworkorg/intake/issues"
+  },
+  "homepage": "https://github.com/stayworkorg/intake#readme",
+  "devDependencies": {
+    "serve": "^2.1.2"
+  },
+  "dependencies": {
+    "normalize.css": "^5.0.0"
+  }
+}
