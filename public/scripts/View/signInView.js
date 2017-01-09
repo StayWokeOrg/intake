@@ -7,12 +7,13 @@ newUser.initnewUserPage = function () {
 newUser.create = function() {
   var input_ids = $('#new-user-form input').map(function() {
       return this.id;
-  });
-  var currentUser = new User();
+  }).get();
+  var CurrentUser = new User();
   input_ids.forEach(function(id){
-    currentUser[id] = $('#' + id).val()
+    CurrentUser[id] = $('#' + id).val()
   })
-  currentUser.insertNewUser();
+  console.log('New user', CurrentUser);
+  CurrentUser.insertNewUser();
 };
 
 newUser.initnewUserPage();
