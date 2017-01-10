@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Form Prototype</title>
+        <title>Get Involved</title>
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -15,7 +15,7 @@
     </head>
     <body>
 
-        <section class="page">
+        <section class="page page1">
             <section class="header">
                 <h1>Intake Page 1 Title</h1>
                 <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
@@ -28,9 +28,14 @@
                 <h2>Subsection 3</h2>
                 <p>Eumsan quation dio, dunt gait, alisi sequat, im ligula habitasse ilis psusto. Nos enis stincil iliqui. Adionsed alis iscidunt commolor morbi, utetumm accumsan mi irit mod am essi justo accummy. </p>
             </section>
+            <section class="scroll-down">
+                <!-- old school anchor link - might convert to some fancy scroller later -->
+                <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
+            </section>
         </section>
 
-        <section class="page">
+        <a name="form"></a>
+        <section class="page page2">
             <section class="header">
                 <h1>Intake Page 2 Title</h1>
                 <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
@@ -38,7 +43,7 @@
             <section class="intake">
                 <p>Congue aciliquis atis, faccummy aliqui ing vero commodolor dolesecte, nec eugiamconse conubia.</p>
 
-                <form onsubmit="return false">
+                <form action="submit" method="post">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control input-lg" type="text" name="name" id="name" required>
@@ -51,12 +56,17 @@
                         <label for="phone_number">Phone number</label>
                         <input class="form-control input-lg" type="phone" name="phone_number" id="phone_number">
                     </div>
+                    <input type="hidden" name="campaign" id="campaign" value="some_campaign">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
                     </div>
                 </form>
             </section>
         </section>
+
+        <footer>
+            <p>Other links here?</p>
+        </footer>
 
     </body>
 </html>

@@ -6,7 +6,9 @@ const compression = require('compression')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
+const saveUser = require('./src/user/save_user')
 const dotenv = require('dotenv')
+const debug = require('debug')('app')
 
 // Load environment variables from .env file
 dotenv.load()
@@ -16,6 +18,8 @@ if (!process.env.PORT) {
   console.log('Or, please add a port to your .env file.')
   process.exit(1)
 }
+
+debug('test')
 
 const app = express()
 
@@ -41,6 +45,24 @@ const smsController = require('./controllers/sms.controller')
 app.route('/sms')
   .get(smsController.index)
   .post(smsController.receiveWoke)
+
+// web app endpoints
+app.post('/submit', (req, res) => {
+  // form data is in req.body
+  saveUser(req.body, {
+    source: 'web',
+  })
+  .then((data) => {
+    debug(data)
+    // redirect to a static confirmation page
+    res.redirect('/success.html')
+  })
+  .catch((reason) => {
+    debug(reason)
+    // TODO(pascal): redirect to an error message
+    res.redirect('/')
+  })
+})
 
 // Production error handler
 if (app.get('env') === 'production') {

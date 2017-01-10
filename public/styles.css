@@ -14,23 +14,40 @@ body {
 h1 {
     font-size: 48px;
 }
-h1 {
+h2 {
     font-size: 36px;
 }
 
 .page {
+    box-sizing: border-box;
     min-height: 80vh;
-    padding-bottom: 30px;
-}
-
-.page section {
-    padding: 20px;
-    margin-bottom: 50px;
     max-width: 640px;
     margin: 0 auto;
 }
+.page + .page {
+    margin-top: 30px;
+}
 
-.intake {
+footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.scroll-down {
+    text-align: center;
+}
+
+.page section {
+    padding: 0 20px;
+}
+
+section {
+    margin-top: 30px;
+}
+
+section.intake {
+    padding-top: 20px;
+    padding-bottom: 20px;
     color: black;
     max-width: 640px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -38,17 +55,22 @@ h1 {
     padding: 20px;
 }
 
+section.intake .btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 640px) {
     body {
         min-width: 310px;
         padding: 5px;
-        font-size: 14px;
+        font-size: 16px;
     }
     h1 {
-        font-size: 24px;
+        font-size: 28px;
     }
     h2 {
-        font-size: 20px;
+        font-size: 22px;
     }
     .header {
         margin: 0;
