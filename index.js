@@ -7,7 +7,7 @@ const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const dotenv = require('dotenv')
-const saveUser = require('./user/save_user')
+const saveUser = require('./src/user/save_user')
 const debug = require('debug')('app')
 
 // Load environment variables from .env file
@@ -29,7 +29,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator())
 app.use(methodOverride('_method'))
-app.use(express.static(path.resolve(__dirname, '../public')))
+app.use(express.static(path.resolve(__dirname, 'public')))
 
 // web app endpoints
 app.post('/submit', (req, res) => {
@@ -60,7 +60,7 @@ if (app.get('env') === 'production') {
 }
 
 app.listen(app.get('port'), () => {
-  debug(`Express server listening on port ${app.get('port')}`)
+  console.log(`Express server listening on port ${app.get('port')}`)
 })
 
 module.exports = app
