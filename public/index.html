@@ -29,12 +29,13 @@
                 <p>Eumsan quation dio, dunt gait, alisi sequat, im ligula habitasse ilis psusto. Nos enis stincil iliqui. Adionsed alis iscidunt commolor morbi, utetumm accumsan mi irit mod am essi justo accummy. </p>
             </section>
             <section class="scroll-down">
-                <!-- inline JS on this node, will probably move to a script tag, later -->
-                <div class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down" onClick="var page = document.querySelector('.page1'); var bounds = page.getBoundingClientRect(); window.scrollBy(0, bounds.height + 100);"></div>
+                <!-- old school anchor link - might convert to some fancy scroller later -->
+                <a href="#page2" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
             </section>
         </section>
 
-        <section class="page">
+        <a name="page2"></a>
+        <section class="page page2">
             <section class="header">
                 <h1>Intake Page 2 Title</h1>
                 <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
@@ -62,9 +63,9 @@
             </section>
         </section>
 
-        <section class="footer">
+        <footer>
             <p>Other links here?</p>
-        </section>
+        </footer>
 
     </body>
 </html>
