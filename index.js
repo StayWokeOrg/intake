@@ -39,6 +39,7 @@ var smsController = require('./controllers/sms.controller');
 
 // SMS Routes
 app.route('/sms')
+  .get(smsController.index)
   .post(smsController.receiveWoke);
 
 // Production error handler
