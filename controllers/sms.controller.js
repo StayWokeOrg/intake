@@ -1,20 +1,20 @@
-'use strict';
+'use strict'
 
 // SMS controller using Twilio API
-// var client = require('twilio');
+// var client = require('twilio')
 //require the Twilio module and create a REST client
-var client = require('twilio')(process.env.TWILIO_API_SID, process.env.TWILIO_API_TOKEN);
+var client = require('twilio')(process.env.TWILIO_API_SID, process.env.TWILIO_API_TOKEN)
 
 exports.index = function(req, res) {
-  console.log('hello');
+  console.log('hello')
 }
 
 exports.receiveWoke = function(req, res) {
-  res.header('Content-Type', 'text/xml');
-  var body = req.param('Body').trim();
+  res.header('Content-Type', 'text/xml')
+  var body = req.param('Body').trim()
 
   // the voter, use this to keep people from voting more than once
-  var from = req.param('From');
+  var from = req.param('From')
   client.sendMessage({
     to: from,
     from: process.env.TWILIO_API_NUMBER,
@@ -22,15 +22,15 @@ exports.receiveWoke = function(req, res) {
   }, function(error, message) {
     // If no errors
     if (!error) {
-      console.log('Success! The SID for this SMS message is:');
-      console.log(message.sid);
-      console.log('Message sent on:');
-      console.log(message.dateCreated);
-      return 'welcome';
+      console.log('Success! The SID for this SMS message is:')
+      console.log(message.sid)
+      console.log('Message sent on:')
+      console.log(message.dateCreated)
+      return 'welcome'
     } else {
       // ERRORS!!!!
-      console.error('Oops! There was an error.');
-      console.error(error);
+      console.error('Oops! There was an error.')
+      console.error(error)
     }
   })
 }
@@ -44,15 +44,15 @@ exports.welcomeMessage = function(name, phone) {
   }, function(error, message) {
     // If no errors
     if (!error) {
-        console.log('Success! The SID for this SMS message is:');
-        console.log(message.sid);
-        console.log('Message sent on:');
-        console.log(message.dateCreated);
-        return 'welcome';
+        console.log('Success! The SID for this SMS message is:')
+        console.log(message.sid)
+        console.log('Message sent on:')
+        console.log(message.dateCreated)
+        return 'welcome'
     } else {
     	// ERRORS!!!!
-        console.error('Oops! There was an error.');
-        console.error(error);
+        console.error('Oops! There was an error.')
+        console.error(error)
     }
   })
 }
