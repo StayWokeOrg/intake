@@ -1,6 +1,6 @@
 const http = require('http')
 const validateCampaign = require('../validate_campaign')
-const debug = require('debug')('user save')
+const debug = require('debug')('app')
 
 module.exports = function saveUser(user, { source }) {
   return new Promise((resolve, reject) => {

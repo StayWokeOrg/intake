@@ -1,4 +1,10 @@
 /* eslint-disable no-console */
+
+// Load environment variables from .env file
+const dotenv = require('dotenv')
+
+dotenv.load()
+
 const express = require('express')
 const path = require('path')
 const logger = require('morgan')
@@ -6,18 +12,16 @@ const compression = require('compression')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
-const dotenv = require('dotenv')
 const saveUser = require('./src/user/save_user')
 const debug = require('debug')('app')
-
-// Load environment variables from .env file
-dotenv.load()
 
 if (!process.env.PORT) {
   debug('Please `cp example_dot_env .env` to create your .env file.')
   debug('Or, please add a port to your .env file.')
   process.exit(1)
 }
+
+debug('test')
 
 const app = express()
 
