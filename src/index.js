@@ -41,7 +41,7 @@ app.post('/submit', (req, res) => {
   })
   .then((data) => {
     debug(data)
-    // redirect to a static confirmation page for now
+    // redirect to a static confirmation page
     res.redirect('/success.html')
   })
   .catch((reason) => {
