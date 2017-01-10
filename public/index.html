@@ -15,7 +15,7 @@
     </head>
     <body>
 
-        <section class="page">
+        <section class="page page1">
             <section class="header">
                 <h1>Intake Page 1 Title</h1>
                 <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
@@ -28,6 +28,10 @@
                 <h2>Subsection 3</h2>
                 <p>Eumsan quation dio, dunt gait, alisi sequat, im ligula habitasse ilis psusto. Nos enis stincil iliqui. Adionsed alis iscidunt commolor morbi, utetumm accumsan mi irit mod am essi justo accummy. </p>
             </section>
+            <section class="scroll-down">
+                <!-- inline JS on this node, will probably move to a script tag, later -->
+                <div class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down" onClick="var page = document.querySelector('.page1'); var bounds = page.getBoundingClientRect(); window.scrollBy(0, bounds.height + 100);"></div>
+            </section>
         </section>
 
         <section class="page">
@@ -38,7 +42,7 @@
             <section class="intake">
                 <p>Congue aciliquis atis, faccummy aliqui ing vero commodolor dolesecte, nec eugiamconse conubia.</p>
 
-                <form onsubmit="return false">
+                <form action="submit" method="post">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input class="form-control input-lg" type="text" name="name" id="name" required>
@@ -56,6 +60,10 @@
                     </div>
                 </form>
             </section>
+        </section>
+
+        <section class="footer">
+            <p>Other links here?</p>
         </section>
 
     </body>

@@ -19,8 +19,19 @@ h1 {
 }
 
 .page {
-    min-height: 80vh;
-    padding-bottom: 30px;
+    box-sizing: border-box;
+    min-height: 80vh
+}
+.page + .page {
+    margin-top: 30px;
+}
+
+.footer {
+    text-align: center;
+}
+
+.scroll-down {
+    text-align: center;
 }
 
 .page section {

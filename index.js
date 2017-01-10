@@ -37,6 +37,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.post('/sms/update_user_name', smsController.updateUserName);
 // app.get('/sms/update_user_name', smsController.updateUserNameTest);
 
+app.post('/submit', (req, res) => {
+  // form data is in req.body
+  // so we would add a db call here to save the data
+  console.log(req.body);
+
+  // redirect to a static confirmation page for now
+  res.redirect('/success.html');
+});
+
 // Production error handler
 if (app.get('env') === 'production') {
   app.use((err, req, res, next) => {
