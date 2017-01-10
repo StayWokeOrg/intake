@@ -1,3 +1,5 @@
+const ERROR = 'error';
+
 module.exports = {
     "extends": "airbnb-base",
     "plugins": [
@@ -5,11 +7,19 @@ module.exports = {
     ],
     "rules": {
         "no-unused-vars": [
-            'error',
+            ERROR,
             {
                 vars: 'all',
                 args: 'none',
             },
+        ],
+        'semi': [
+            ERROR,
+            'never',
+        ],
+        'quote-props': [
+            ERROR,
+            'consistent',
         ],
     },
 

@@ -1,1 +1,4 @@
 PORT=3030
+DATA_API=stay-woke-central.mattstauffer.co
+DATA_API_PORT=80
+DEBUG=app
