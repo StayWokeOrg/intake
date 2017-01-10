@@ -29,17 +29,12 @@ app.use(expressValidator());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Controllers
-// const smsController = require('./controllers/sms');
-
-// app.post('/sms/new_user', smsController.newUser);
-// app.get('/sms/new_user', smsController.newUserTest);
-// app.post('/sms/update_user_name', smsController.updateUserName);
-// app.get('/sms/update_user_name', smsController.updateUserNameTest);
-
+// web app endpoints
 app.post('/submit', (req, res) => {
   // form data is in req.body
-  // so we would add a db call here to save the data
+  // TODO(pascalpp): add a db call here to save the data
+  // waiting on https://github.com/StayWokeOrg/intake/issues/4
+  // for now, just logging data to console
   console.log(req.body);
 
   // redirect to a static confirmation page for now
