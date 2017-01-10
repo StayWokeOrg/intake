@@ -41,9 +41,9 @@ if (app.get('env') === 'production') {
 }
 
 app.post('/submit', function (req, res) {
-  var name = req.body.name,
-    phone = req.body.phone_number;
-  smsController.welcomeMessage(name, phone)
+  name = req.body.name;
+  phone = req.body.phone_number;
+  smsController.welcomeMessage(name, phone);
 });
 
 app.listen(app.get('port'), () => {

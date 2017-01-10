@@ -1,14 +1,17 @@
 'use strict';
 
 // SMS controller using Twilio API
-var client = require('twilio');
-var request =  require('request');
+// var client = require('twilio');
+//require the Twilio module and create a REST client
+var client = require('twilio')(process.env.TWILIO_API_SID, process.env.TWILIO_API_TOKEN);
 
-exports.welcomeMessage = function(req, res) {
+//Send an text message
+
+exports.welcomeMessage = function(name, phone) {
   client.sendMessage({
   	to: phone,
-  	from: TWILIO_API_NUMBER,
-  	message: 'Welcome' + name +'. Join the resistance.'
+  	from: process.env.TWILIO_API_NUMBER,
+  	body: 'Welcome ' + name +'. Join the resistance.'
   }, function(error, message) {
     // If no errors
     if (!error) {
@@ -16,9 +19,11 @@ exports.welcomeMessage = function(req, res) {
         console.log(message.sid);
         console.log('Message sent on:');
         console.log(message.dateCreated);
+        return 'welcome';
     } else {
     	// ERRORS!!!!
-        console.log('Oops! There was an error.');
+        console.error('Oops! There was an error.');
+        console.error(error);
     }
   })
 }
