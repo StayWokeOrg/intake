@@ -29,8 +29,17 @@ app.use(expressValidator());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Controllers
+// ngrok For Testing
+var ngrok = require('ngrok');
+ngrok.authtoken(process.env.NGROK_AUTHTOKEN, function(err, token) {});
+ngrok.connect(function (err, url) {});
+
+// Controllers
 var smsController = require('./controllers/sms.controller');
+
+// SMS Routes
+app.route('/sms')
+  .post(smsController.receiveWoke);
 
 // Production error handler
 if (app.get('env') === 'production') {
@@ -39,12 +48,6 @@ if (app.get('env') === 'production') {
     res.sendStatus(err.status || 500);
   });
 }
-
-app.post('/submit', function (req, res) {
-  name = req.body.name;
-  phone = req.body.phone_number;
-  smsController.welcomeMessage(name, phone);
-});
 
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`);
