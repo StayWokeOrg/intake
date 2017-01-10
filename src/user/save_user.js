@@ -1,27 +1,37 @@
 const http = require('http')
+const validateCampaign = require('../validate_campaign')
 const debug = require('debug')('user save')
 
 module.exports = function saveUser(user, { source }) {
   return new Promise((resolve, reject) => {
+    // validate user data
     if (!user.name) return reject('user must have a name')
-    if (!user.campaign) return reject('user must have a campaign')
     if (!user.email_address && !user.phone_number) return reject('user must have an email_address or a phone_number')
+
+    // validate campaign
+    const campaign = validateCampaign(user.campaign)
+    if (!campaign) return reject('user must have a campaign')
+
+    // validate source
     if (!source) return reject('user must have a source')
 
+    // build data object for POST to central
     const data = {
       name: user.name,
       email: user.email_address,
       phone: user.phone_number,
-      campaign: user.campaign,
+      campaign,
       source,
     }
 
+    // convert data to a query-encoded string key1=val1&key2=val2
     const encodedData = (
       Object.keys(data)
       .map(key => `${key}=${data[key]}`)
       .join('&')
     )
 
+    // options for http request
     const API_OPTIONS = {
       hostname: process.env.DATA_API,
       port: process.env.DATA_API_PORT,
@@ -34,10 +44,13 @@ module.exports = function saveUser(user, { source }) {
       },
     }
 
+    // make the request
     const req = http.request(API_OPTIONS, (res) => {
       debug(`Status: ${res.statusCode}`)
       debug(`Headers: ${JSON.stringify(res.headers)}`)
       res.setEncoding('utf8')
+
+      // listen for the response data
       res.on('data', (body) => {
         debug(`Body: ${body}`)
         resolve(body)
@@ -47,7 +60,10 @@ module.exports = function saveUser(user, { source }) {
       debug(`problem with request: ${err.message}`)
     })
 
+    // send our data
     req.write(encodedData)
+
+    // end the request
     req.end()
 
     return null
