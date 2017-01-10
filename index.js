@@ -29,13 +29,17 @@ app.use(expressValidator());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Controllers
-// const phoneController = require('./controllers/phone');
+// web app endpoints
+app.post('/submit', (req, res) => {
+  // form data is in req.body
+  // TODO(pascalpp): add a db call here to save the data
+  // waiting on https://github.com/StayWokeOrg/intake/issues/4
+  // for now, just logging data to console
+  console.log(req.body);
 
-// app.post('/new_phone_call', phoneController.newCall);
-// app.get('/new_phone_call', phoneController.newCallTestGet);
-// app.post('/redir_call_for_zip', phoneController.redirectCall);
-// app.get('/redir_call_for_zip', phoneController.redirectCallTest);
+  // redirect to a static confirmation page for now
+  res.redirect('/success.html');
+});
 
 // Production error handler
 if (app.get('env') === 'production') {
