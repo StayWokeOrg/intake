@@ -4,7 +4,7 @@
 var client = require('twilio');
 var request =  require('request');
 
-function welcomeMessage(name,phone) {
+exports.welcomeMessage = function(req, res) {
   client.sendMessage({
   	to: phone,
   	from: TWILIO_API_NUMBER,

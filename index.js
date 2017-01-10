@@ -30,7 +30,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // // Controllers
-const smsController = require('./controllers/sms.controller');
+var smsController = require('./controllers/sms.controller');
 
 // Production error handler
 if (app.get('env') === 'production') {
@@ -39,6 +39,12 @@ if (app.get('env') === 'production') {
     res.sendStatus(err.status || 500);
   });
 }
+
+app.post('/submit', function (req, res) {
+  var name = req.body.name,
+    phone = req.body.phone_number;
+  smsController.welcomeMessage(name, phone)
+});
 
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`);
