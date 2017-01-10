@@ -34,8 +34,6 @@ app.use(express.static(path.resolve(__dirname, 'public')))
 // web app endpoints
 app.post('/submit', (req, res) => {
   // form data is in req.body
-  console.log(req.body)
-
   saveUser(req.body, {
     source: 'web',
   })
