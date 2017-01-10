@@ -29,13 +29,13 @@ app.use(expressValidator());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Controllers
-// const phoneController = require('./controllers/phone');
+// Controllers
+// const smsController = require('./controllers/sms');
 
-// app.post('/new_phone_call', phoneController.newCall);
-// app.get('/new_phone_call', phoneController.newCallTestGet);
-// app.post('/redir_call_for_zip', phoneController.redirectCall);
-// app.get('/redir_call_for_zip', phoneController.redirectCallTest);
+// app.post('/sms/new_user', smsController.newUser);
+// app.get('/sms/new_user', smsController.newUserTest);
+// app.post('/sms/update_user_name', smsController.updateUserName);
+// app.get('/sms/update_user_name', smsController.updateUserNameTest);
 
 // Production error handler
 if (app.get('env') === 'production') {
