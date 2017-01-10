@@ -30,12 +30,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // // Controllers
-// const phoneController = require('./controllers/phone');
-
-// app.post('/new_phone_call', phoneController.newCall);
-// app.get('/new_phone_call', phoneController.newCallTestGet);
-// app.post('/redir_call_for_zip', phoneController.redirectCall);
-// app.get('/redir_call_for_zip', phoneController.redirectCallTest);
+const smsController = require('./controllers/sms.controller');
 
 // Production error handler
 if (app.get('env') === 'production') {
