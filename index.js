@@ -1,4 +1,8 @@
 /* eslint-disable no-console */
+const dotenv = require('dotenv')
+// Load environment variables from .env file
+dotenv.load()
+
 const express = require('express')
 const path = require('path')
 const logger = require('morgan')
@@ -7,11 +11,7 @@ const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const saveUser = require('./src/user/save_user')
-const dotenv = require('dotenv')
 const debug = require('debug')('app')
-
-// Load environment variables from .env file
-dotenv.load()
 
 if (!process.env.PORT) {
   console.log('Please `cp example_dot_env .env` to create your .env file.')
