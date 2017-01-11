@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
-
-// Load environment variables from .env file
 const dotenv = require('dotenv')
-
+// Load environment variables from .env file
 dotenv.load()
 
 const express = require('express')
@@ -17,8 +15,8 @@ const saveUser = require('./src/user/save_user')
 const debug = require('debug')('app')
 
 if (!process.env.PORT) {
-  debug('Please `cp example_dot_env .env` to create your .env file.')
-  debug('Or, please add a port to your .env file.')
+  console.log('Please `cp example_dot_env .env` to create your .env file.')
+  console.log('Or, please add a port to your .env file.')
   process.exit(1)
 }
 
@@ -35,7 +33,20 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator())
 app.use(methodOverride('_method'))
-app.use(express.static(path.resolve(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
+
+// ngrok For Testing
+const ngrok = require('ngrok')
+ngrok.authtoken(process.env.NGROK_AUTHTOKEN, function(err, token) {})
+ngrok.connect(function (err, url) {})
+
+// Controllers
+const smsController = require('./controllers/sms.controller')
+
+// SMS Routes
+app.route('/sms')
+  .get(smsController.index)
+  .post(smsController.receiveWoke)
 
 // web app endpoints
 app.post('/submit', (req, res) => {
