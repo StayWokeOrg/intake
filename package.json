@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "mocha --recursive test/",
+    "start": "node index.js",
+    "lint": "eslint src",
+    "lint-fix": "eslint --fix src/"
   },
   "repository": {
     "type": "git",
@@ -21,18 +23,22 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
+    "debug": "^2.6.0",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-validator": "^2.20.4",
+    "helmet": "^3.3.0",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
     "request": "^2.72.0",
     "twilio": "^2.9.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^3.13.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-disallow-methods": "^0.1.0",
     "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0"
   },
