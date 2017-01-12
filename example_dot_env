@@ -1,4 +1,16 @@
+# express http port
 PORT=3030
+
+# secret key used to secure the session. for local development, you don't need
+# to modify this. see also: https://www.npmjs.com/package/express-session#secret
+SESSION_SECRET=some_secret
+
+# settings for Central data API. Ask @mattstauffer in staywoke slack for a dev
+# token. see also: https://github.com/StayWokeOrg/central
 DATA_API=stay-woke-central.mattstauffer.co
 DATA_API_PORT=80
-DEBUG=app
+DATA_API_TOKEN=
+
+# debug logging for various parts of the app. add or remove keys from this list
+# to show/hide different logs in your express console
+DEBUG=app,user,sms
