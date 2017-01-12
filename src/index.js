@@ -40,12 +40,6 @@ app.use(expressValidator())
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, './public')))
 
-// we'd only want this in dev, so need to conditionalize this
-// ngrok For Testing
-// const ngrok = require('ngrok')
-// ngrok.authtoken(process.env.NGROK_AUTHTOKEN, (err, token) => {})
-// ngrok.connect((err, url) => {})
-
 // Controllers
 const sms = require('./controller/sms/sms')
 const web = require('./controller/web')
@@ -67,5 +61,19 @@ if (app.get('env') === 'production') {
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`)
 })
+
+
+// if ngrok auth token is defined, setup ngrok
+if (process.env.NGROK_AUTHTOKEN) {
+  // eslint-disable-next-line global-require
+  const ngrok = require('ngrok')
+  ngrok.authtoken(process.env.NGROK_AUTHTOKEN, (err, token) => {
+    if (err) debug(err)
+  })
+  ngrok.connect(app.get('port'), (err, url) => {
+    if (err) debug(err)
+    console.log('ngrok URL', url)
+  })
+}
 
 module.exports = app
