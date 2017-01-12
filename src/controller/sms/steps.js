@@ -44,7 +44,12 @@ const steps = {
         source: 'sms',
       })
       .then((data) => {
-        debug(data)
+        // remove session properties so they start over again
+        req.session.name = null
+        req.session.email = null
+        req.session.phone = null
+        req.session.keyword = null
+
         res.send(message('Thanks for getting involved! We’ll be in touch soon.'))
       }, (reason) => {
         debug('error', reason)
