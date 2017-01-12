@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, './public')))
 // ngrok.connect((err, url) => {})
 
 // Controllers
-const sms = require('./controller/sms')
+const sms = require('./controller/sms/sms')
 const web = require('./controller/web')
 
 // SMS route

@@ -3,11 +3,11 @@ const chai = require('chai')
 const expect = chai.expect // eslint-disable-line
 const should = chai.should() // eslint-disable-line
 
-const sms = require('../src/controller/sms')
+const getStepName = require('../../src/controller/sms/get_step_name')
 
-describe('controller/sms:', () => {
+describe('controller/sms/get_step_name:', () => {
   describe('#getStepName(session)', () => {
-    const method = sms.getStepName
+    const method = getStepName
     describe('if session is empty', () => {
       it('should return "keyword"', () => {
         const session = {}
