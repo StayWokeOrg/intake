@@ -66,7 +66,5 @@ module.exports = function saveUser(user, { source }) {
 
     // end the request
     req.end()
-
-    return null
   })
 }
