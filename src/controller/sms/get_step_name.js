@@ -2,7 +2,7 @@ const steps = require('./steps')
 const debug = require('debug')('sms') // eslint-disable-line
 
 /**
- * getNextStepName - gets the current step name based on session data
+ * getStepName - gets the current step name based on session data
  *
  * @param  {object} session session object from request
  * @return {string} name of current step
