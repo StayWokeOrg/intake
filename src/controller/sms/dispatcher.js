@@ -22,14 +22,14 @@ module.exports = function dispatcher(req, res) {
   const stepName = getStepName(req.session)
   debug('step', stepName)
 
+  const nextStepName = getNextStepName(req.session)
+  debug('next step', nextStepName)
+
   // if the step exists and has an after handler, call it
   const step = steps[stepName]
   if (step && step.after) {
     step.after(req, res)
   }
-
-  const nextStepName = getNextStepName(req.session)
-  debug('next step', nextStepName)
 
   // if the next step exists and has a before handler, call it
   const nextStep = steps[nextStepName]
