@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test mocha --recursive test/",
     "test:watch": "NODE_ENV=test chokidar '**/*.js' --initial --ignore node_modules -c 'mocha --recursive test/'",
-    "start": "node index.js",
+    "start": "node src/index.js",
     "lint": "eslint src",
     "lint-fix": "eslint --fix src/"
   },
