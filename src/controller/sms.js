@@ -1,20 +1,8 @@
 /* eslint-disable no-param-reassign */
-
-// const twilio = require('twilio')
 const saveUser = require('../user/save_user')
 const debug = require('debug')('sms')
 
-// don't initialize twilio in tests. TODO(pascal): better way to do this?
-// not sure we actually need the twilio client since we're not initiating the contact
-// all we have to do is listen for requests and send a response
-// let client
-// if (process.env.NODE_ENV !== 'test') {
-//   client = twilio(process.env.TWILIO_API_SID, process.env.TWILIO_API_TOKEN)
-// } else {
-//   client = {}
-// }
-
-// TWIML helper
+// TWIML markup helper
 function message(msg) {
   return `
     <Response>
@@ -26,12 +14,7 @@ function message(msg) {
 }
 
 // list of steps for the SMS flow. each step is an object with a before handler,
-// or an after handler, or both. when a request comes in, the dispatcher
-// inspects the session to see which steps have been satisfied already to
-// determine the current step and the next step. it then calls the after handler
-// of the current step, and the before handler of the next step. the after
-// handler for a step reads the user's response and stores it in the session.
-// the before handler for a step asks the user for the next piece of data.
+// or an after handler, or both. see dispatcher for more info.
 const steps = {
   'keyword': {
     after(req, res) {
@@ -80,8 +63,12 @@ const steps = {
   },
 }
 
-// determines the current step name based on session data
-// just returning a string here for easy testability
+/**
+ * getNextStepName - gets the current step name based on session data
+ *
+ * @param  {object} session session object from request
+ * @return {string} name of current step
+ */
 function getStepName(session) {
   const stepName = Object.keys(steps).reduce((memo, step) => {
     if (memo) return memo
@@ -92,7 +79,13 @@ function getStepName(session) {
   return stepName
 }
 
-// gets the next step name based on session data
+
+/**
+ * getNextStepName - gets the next step name based on session data
+ *
+ * @param  {object} session session object from request
+ * @return {string} name of next step
+ */
 function getNextStepName(session) {
   const stepNames = Object.keys(steps)
   const stepName = getStepName(session)
@@ -101,6 +94,21 @@ function getNextStepName(session) {
   return nextStepName
 }
 
+
+/**
+ * dispatcher - primary SMS handler
+ *
+
+ when a request comes in, the dispatcher inspects the session to see which steps
+ have been satisfied already to determine the current step and the next step. it
+ then calls the after handler of the current step, and the before handler of the
+ next step. the after handler for a step reads the user's response and stores it
+ in the session. the before handler for a step asks the user for the next piece
+ of data.
+
+ * @param  {type} req express request object
+ * @param  {type} res express response object
+ */
 function dispatcher(req, res) {
   const stepName = getStepName(req.session)
   debug('step', stepName)
