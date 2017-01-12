@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const dotenv = require('dotenv')
+
 // Load environment variables from .env file
 dotenv.load()
 
@@ -11,8 +12,8 @@ const compression = require('compression')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
-const saveUser = require('./src/user/save_user')
-const debug = require('debug')('app')
+const session = require('express-session')
+const debug = require('debug')('app') // eslint-disable-line
 
 if (!process.env.PORT) {
   console.log('Please `cp example_dot_env .env` to create your .env file.')
@@ -20,51 +21,39 @@ if (!process.env.PORT) {
   process.exit(1)
 }
 
-debug('test')
-
 const app = express()
 
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
 app.use(helmet())
 app.use(compression())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator())
 app.use(methodOverride('_method'))
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, './public')))
 
+// we'd only want this in dev, so need to conditionalize this
 // ngrok For Testing
-const ngrok = require('ngrok')
-ngrok.authtoken(process.env.NGROK_AUTHTOKEN, function(err, token) {})
-ngrok.connect(function (err, url) {})
+// const ngrok = require('ngrok')
+// ngrok.authtoken(process.env.NGROK_AUTHTOKEN, (err, token) => {})
+// ngrok.connect((err, url) => {})
 
 // Controllers
-const smsController = require('./controllers/sms.controller')
+const sms = require('./controller/sms')
+const web = require('./controller/web')
 
-// SMS Routes
-app.route('/sms')
-  .get(smsController.index)
-  .post(smsController.receiveWoke)
+// SMS route
+app.post('/sms', sms.dispatcher)
 
-// web app endpoints
-app.post('/submit', (req, res) => {
-  // form data is in req.body
-  saveUser(req.body, {
-    source: 'web',
-  })
-  .then((data) => {
-    debug(data)
-    // redirect to a static confirmation page
-    res.redirect('/success.html')
-  })
-  .catch((reason) => {
-    debug(reason)
-    // TODO(pascal): redirect to an error message
-    res.redirect('/')
-  })
-})
+// web app routes
+app.post('/submit', web.submit)
 
 // Production error handler
 if (app.get('env') === 'production') {
