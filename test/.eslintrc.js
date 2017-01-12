@@ -1,3 +1,5 @@
+const OFF = 'off';
+const WARN = 'warn';
 const ERROR = 'error';
 
 const baseConfig = require('../.eslintrc.js')
@@ -5,8 +7,6 @@ const baseConfig = require('../.eslintrc.js')
 var testConfig = Object.assign({}, baseConfig)
 
 testConfig.globals = testConfig.globals || {}
-
-testConfig.plugins.push('disallow-methods')
 
 Object.assign(testConfig.globals, {
     'describe': true,
@@ -18,6 +18,14 @@ Object.assign(testConfig.globals, {
     'beforeEach': true,
     'after': true,
     'afterEach': true,
+})
+
+testConfig.plugins.push('disallow-methods')
+
+testConfig.rules = Object.assign({}, baseConfig.rules, {
+  'no-unused-expressions': [
+    OFF
+  ]
 })
 
 module.exports = testConfig

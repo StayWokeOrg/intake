@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive test/",
-    "start": "node index.js",
+    "test": "NODE_ENV=test mocha --recursive test/",
+    "test:watch": "NODE_ENV=test chokidar '**/*.js' --initial --ignore node_modules -c 'mocha --recursive test/'",
+    "start": "node src/index.js",
     "lint": "eslint src",
     "lint-fix": "eslint --fix src/"
   },
@@ -21,20 +22,21 @@
   },
   "homepage": "https://github.com/stayworkorg/intake#readme",
   "dependencies": {
+    "chai": "^3.5.0",
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
     "debug": "^2.6.0",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
+    "express-session": "^1.14.2",
     "express-validator": "^2.20.4",
     "helmet": "^3.3.0",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
-    "request": "^2.72.0",
-    "twilio": "^2.9.1"
+    "ngrok": "2.2.4"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chokidar-cli": "^1.2.0",
     "eslint": "^3.13.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-config-airbnb-base": "^11.0.0",

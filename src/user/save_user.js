@@ -6,7 +6,7 @@ module.exports = function saveUser(user, { source }) {
   return new Promise((resolve, reject) => {
     // validate user data
     if (!user.name) return reject('user must have a name')
-    if (!user.email_address && !user.phone_number) return reject('user must have an email_address or a phone_number')
+    if (!user.email && !user.phone) return reject('user must have an email or a phone')
 
     // validate campaign
     const campaign = validateCampaign(user.campaign)
@@ -18,8 +18,8 @@ module.exports = function saveUser(user, { source }) {
     // build data object for POST to central
     const data = {
       name: user.name,
-      email: user.email_address,
-      phone: user.phone_number,
+      email: user.email,
+      phone: user.phone,
       campaign,
       source,
     }
@@ -41,6 +41,7 @@ module.exports = function saveUser(user, { source }) {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': 'application/json',
         'Cache-Control': 'no-cache',
+        'Authorization': `Bearer ${process.env.DATA_API_TOKEN}`,
       },
     }
 
@@ -65,7 +66,5 @@ module.exports = function saveUser(user, { source }) {
 
     // end the request
     req.end()
-
-    return null
   })
 }
