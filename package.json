@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/stayworkorg/intake#readme",
   "dependencies": {
+    "chai": "^3.5.0",
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
     "debug": "^2.6.0",
@@ -35,7 +36,6 @@
     "ngrok": "2.2.4"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "chokidar-cli": "^1.2.0",
     "eslint": "^3.13.0",
     "eslint-config-airbnb": "^13.0.0",
