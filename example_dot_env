@@ -5,7 +5,7 @@ PORT=3030
 # to modify this. see also: https://www.npmjs.com/package/express-session#secret
 SESSION_SECRET=some_secret
 
-# settings for Central data API. Ask @mattstauffer is staywoke slack for a dev
+# settings for Central data API. Ask @mattstauffer in staywoke slack for a dev
 # token. see also: https://github.com/StayWokeOrg/central
 DATA_API=stay-woke-central.mattstauffer.co
 DATA_API_PORT=80
