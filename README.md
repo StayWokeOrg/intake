@@ -23,7 +23,7 @@ The goal: to capture the contact information for as many people who are attendin
 ### 2. Set up Twilio
 Twilio is the API server that routes SMS messages to this app.
 - [Sign up for a Twilio trial account](https://www.twilio.com). You can use this account indefinitely, but you'll only be able to interact with your own phone number.
-- [Buy a phone number](https://www.twilio.com/console/phone-numbers/search). I think the lowest price is $1/month. (Oddly, they didn't ask me for any payment info yet.)
+- [Buy a phone number](https://www.twilio.com/console/phone-numbers/search). I think the lowest price is $1/month. (I think new Twilio users get $1 in free credits, so you won't have to enter payment info right away.)
 - Configure your phone number in Twilio. In the messaging section, set a webhook for when a message comes in, routing to `http://yourngrokurl.ngrok.io/sms`. You'll need to reset this with a new URL each time you start ngrok.
 
 ### 3. Send a text
