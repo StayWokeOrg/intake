@@ -2,6 +2,7 @@
 const dotenv = require('dotenv')
 
 // Load environment variables from .env file
+// need to do this before initializing other modules (e.g. debug)
 dotenv.load()
 
 const express = require('express')
