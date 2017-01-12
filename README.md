@@ -13,7 +13,7 @@ The goal: to capture the contact information for as many people who are attendin
 ## To test SMS
 
 ### Set up ngrok
-`ngrok` is software that allows you to expose your local dev server to the world using a dynamic domain name, e.g. http://2ce2f5a6.ngrok.io
+`ngrok` is software that allows you to expose your local dev server to the world using a dynamic domain name, e.g. http://somesubdomain.ngrok.io.
 - [Sign up for ngrok](https://ngrok.com/).
 - [Install ngrok](https://ngrok.com/download). If you use [homebrew](http://brew.sh) on a Mac, you can do `brew cask install ngrok`.
 - Install your ngrok authtoken. The command for this can be found on your [ngrok dashboard](https://dashboard.ngrok.com/get-started).
