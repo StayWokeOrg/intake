@@ -2,7 +2,7 @@ const saveUser = require('../user/save_user')
 const debug = require('debug')('web')
 
 function submit(req, res) {
-    // form data is in req.body
+  // form data is in req.body
   saveUser(req.body, {
     source: 'web',
   })
@@ -10,8 +10,7 @@ function submit(req, res) {
     debug(data)
     // redirect to a static confirmation page
     res.redirect('/success.html')
-  })
-  .catch((reason) => {
+  }, (reason) => {
     debug(reason)
     // TODO(pascal): redirect to an error message
     res.redirect('/')
