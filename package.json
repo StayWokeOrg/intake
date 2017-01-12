@@ -32,9 +32,7 @@
     "helmet": "^3.3.0",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
-    "ngrok": "2.2.4",
-    "request": "^2.72.0",
-    "twilio": "^2.9.1"
+    "ngrok": "2.2.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
