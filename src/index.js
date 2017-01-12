@@ -76,4 +76,9 @@ if (process.env.NGROK_AUTHTOKEN) {
   })
 }
 
+// ^ TODO(pascal): this doesn't work so well when running with nodemon; it tries
+// to restart ngrok on every change. I find it preferable to run ngrok manually
+// in a separate shell so the URL is persistent and I don't have to keep
+// reconfiguring twilio.
+
 module.exports = app
