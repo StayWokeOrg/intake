@@ -19,10 +19,13 @@ const debug = require('debug')('sms')
  * @param  {type} res express response object
  */
 module.exports = function dispatcher(req, res) {
-  const stepName = getStepName(req.session)
+  // ensure the user object exists in the session
+  req.session.user = req.session.user || {}
+
+  const stepName = getStepName(req.session.user)
   debug('step', stepName)
 
-  const nextStepName = getNextStepName(req.session)
+  const nextStepName = getNextStepName(req.session.user)
   debug('next step', nextStepName)
 
   // if the step exists and has an after handler, call it

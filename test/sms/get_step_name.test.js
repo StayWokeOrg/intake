@@ -6,39 +6,39 @@ const should = chai.should() // eslint-disable-line
 const getStepName = require('../../src/controller/sms/get_step_name')
 
 describe('controller/sms/get_step_name:', () => {
-  describe('#getStepName(session)', () => {
+  describe('#getStepName(user)', () => {
     const method = getStepName
-    describe('if session is empty', () => {
+    describe('if user is empty', () => {
       it('should return "keyword"', () => {
-        const session = {}
-        method(session).should.equal('keyword')
+        const user = {}
+        method(user).should.equal('keyword')
       })
     })
-    describe('if session.keyword exists', () => {
+    describe('if user.keyword exists', () => {
       it('should return "name"', () => {
-        const session = {
+        const user = {
           keyword: 'keyword',
         }
-        method(session).should.equal('name')
+        method(user).should.equal('name')
       })
     })
-    describe('if session.name exists', () => {
+    describe('if user.name exists', () => {
       it('should return "email"', () => {
-        const session = {
+        const user = {
           keyword: 'keyword',
           name: 'First Last',
         }
-        method(session).should.equal('email')
+        method(user).should.equal('email')
       })
     })
-    describe('if session.email exists', () => {
+    describe('if user.email exists', () => {
       it('should return "goodbye"', () => {
-        const session = {
+        const user = {
           keyword: 'keyword',
           name: 'First Last',
           email: 'email@host.com',
         }
-        method(session).should.equal('goodbye')
+        method(user).should.equal('goodbye')
       })
     })
   })
