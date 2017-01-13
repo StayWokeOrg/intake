@@ -5,9 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-module.exports = function (grunt) {
-  'use strict';
-
+module.exports = function config(grunt) {
   // Project configuration.
   grunt.initConfig({
 
@@ -15,22 +13,22 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     clean: {
-      site: ['staywokeBootstrap.css']
+      site: ['staywokeBootstrap.css'],
     },
 
     less: {
       site: {
         src: ['src/public/less/styles.less'],
-        dest: 'src/public/css/staywokeBootstrap.css'
-      }
-    }
-  });
+        dest: 'src/public/build/styles.css',
+      },
+    },
+  })
 
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-contrib-less')
 
-  grunt.registerTask('build', ['clean', 'less']);
+  grunt.registerTask('build', ['clean', 'less'])
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'build']);
-};
+  grunt.registerTask('default', ['clean', 'build'])
+}
