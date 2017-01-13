@@ -29,10 +29,10 @@ h2 {
     left: 25%;
 }
 
-.page {
-    /*min-height: 80vh;
+.page2 {
+    min-height: 80vh;
     max-width: 40rem;
-    margin: 0 auto 4rem;*/
+    margin: 0 auto 4rem;
 }
 
 #about-us{
@@ -50,9 +50,12 @@ section {
 .intake {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
-    color: black;
     max-width: 40rem;
     padding: 1.25rem;
+}
+
+.intake p, .intake label{
+  color: black;
 }
 
 .intake .btn {
