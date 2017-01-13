@@ -1,3 +1,6 @@
+/* ------------------------
+Selected Bootstrap Imports
+--------------------------*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -247,11 +250,11 @@ th {
     border: 1px solid #ddd !important;
   }
 }
-/*@font-face {
+@font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}*/
+}
 .glyphicon {
   position: relative;
   top: 1px;
@@ -2987,7 +2990,7 @@ select[multiple].input-lg {
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   white-space: nowrap;
   padding: 6px 12px;
   font-size: 14px;
@@ -3093,25 +3096,25 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary {
   color: #fff;
   background-color: #db2b39;
-  border-color: #db2b39;
+  border-color: #ca2230;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
+  background-color: #b41f2b;
+  border-color: #5d1016;
 }
 .btn-primary:hover {
-  color: #db2b39;
-  background-color: #fff;
-  border-color: #db2b39;
+  color: #fff;
+  background-color: #b41f2b;
+  border-color: #961923;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #b41f2b;
+  border-color: #961923;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -3123,8 +3126,8 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary.active.focus,
 .open > .dropdown-toggle.btn-primary.focus {
   color: #fff;
-  background-color: #204d74;
-  border-color: #122b40;
+  background-color: #961923;
+  border-color: #5d1016;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3140,11 +3143,11 @@ fieldset[disabled] .btn-primary:focus,
 .btn-primary.disabled.focus,
 .btn-primary[disabled].focus,
 fieldset[disabled] .btn-primary.focus {
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #db2b39;
+  border-color: #ca2230;
 }
 .btn-primary .badge {
-  color: #337ab7;
+  color: #db2b39;
   background-color: #fff;
 }
 .btn-success {
@@ -5250,7 +5253,6 @@ a {
 }
 a:hover,
 a:focus {
-  border-bottom: 2px solid #f3a712;
   text-decoration: none;
   color: #f3a712;
 }
@@ -5295,5 +5297,3 @@ footer {
     padding: 0;
   }
 }
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help

@@ -1,0 +1,172 @@
+
+/* ------------------------
+Selected Bootstrap Imports
+--------------------------*/
+
+// Core variables and mixins
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+// Reset and dependencies
+@import "bootstrap/normalize.less";
+@import "bootstrap/print.less";
+@import "bootstrap/glyphicons.less";
+
+// Core CSS
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+@import "bootstrap/grid.less";
+@import "bootstrap/tables.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/buttons.less";
+
+// Components
+@import "bootstrap/component-animations.less";
+@import "bootstrap/dropdowns.less";
+@import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+@import "bootstrap/list-group.less";
+@import "bootstrap/panels.less";
+@import "bootstrap/close.less";
+
+// Utility classes
+@import "bootstrap/utilities.less";
+@import "bootstrap/responsive-utilities.less";
+
+
+/* ------------------------
+	Custom Variables
+--------------------------*/
+
+// Note these are just placeholder
+@color--primary: 	#222;	//darkgray
+@color--secondary:	#db2b39; //red
+@color--text:		#fff;
+@color--link:		#f3a712; //gold-ish
+
+@font--body:		'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
+@btn-primary-bg: #db2b39;
+
+/* ------------------------
+	Generic Styles
+--------------------------*/
+
+body {
+	background-color: #000;
+}
+
+body, div, p, span, li, blockquote, small {
+	color: @color--text;
+	font-family: @font--body;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+header, section, footer {
+	padding: 60px 0;
+}
+
+h1 {
+	color: @color--text;
+	font-weight: 900;
+	font-size: 50px;
+	font-family: @font--body;
+}
+h2 {
+	color: #ccc;
+	font-weight: 700;
+	font-size: 20px;
+	font-family: @font--body;
+	text-transform: uppercase;
+}
+h3 {
+	color: @color--text;
+	font-weight: 700;
+	font-size: 26px;
+	font-family: @font--body;
+}
+
+.row {
+	padding: 30px 0;  // could be reduced if too extreme
+}
+
+blockquote {
+	font-size: 24px;
+	font-weight: 700;
+	font-style: italic;
+	border-left: 5px solid @color--secondary;
+
+	small {
+		color: #ccc;
+		font-weight: 400;
+	}
+}
+
+a {
+	color: @color--link;
+	font-family: @font--body;
+	font-size: 16px;
+	font-weight: 700;
+	transition: all 100ms;
+
+	&:hover, &:focus {
+		text-decoration: none;
+		color: @color--link;
+	}
+}
+
+/* ------------------------
+	Header
+--------------------------*/
+
+header {
+	background-color: @color--primary;
+
+	.block--heading {
+		border: 5px solid @color--secondary;
+		padding-top: 25px;
+		padding-bottom: 25px;
+	}
+}
+
+/* ------------------------
+	Section: Intro
+--------------------------*/
+
+#intro {
+	background-color: #333;
+}
+
+/* ------------------------
+	Section: Projects
+--------------------------*/
+
+#projects {
+	background-color: #222;
+
+	[class*="col"] {
+		padding-top: 20px;
+		background-color: #222;
+	}
+}
+
+
+/* ------------------------
+	Footer
+--------------------------*/
+
+footer {
+	background-color: #111;
+}
+
+
+/*-------------------------
+	Mobile
+---------------------------*/
+
+@media (max-width: @screen-sm-max) {
+	.row {
+		padding: 0;
+	}
+}
