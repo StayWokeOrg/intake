@@ -20,6 +20,7 @@ module.exports = function saveUser(user, { source }) {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      zip: user.zip,
       campaign,
       source,
     }
