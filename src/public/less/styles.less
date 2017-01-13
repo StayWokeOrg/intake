@@ -116,6 +116,33 @@ a {
 	}
 }
 
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #222;
+    color: #fff;
+    font-family: 'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
+    font-size: 1.125em;
+}
+
+.red-border-bottom:before {
+    position: absolute;
+    margin: auto;
+    z-index: 1;
+    content: "";
+    width: 50%;
+    height: 5px;
+    background: #db2b39;
+    bottom: 38px;
+    left: 25%;
+}
+
+section {
+    padding: 0 0.5rem;
+}
+
 /* ------------------------
 	Header
 --------------------------*/
@@ -138,19 +165,35 @@ header {
 	background-color: #333;
 }
 
-/* ------------------------
-	Section: Projects
---------------------------*/
-
-#projects {
-	background-color: #222;
-
-	[class*="col"] {
-		padding-top: 20px;
-		background-color: #222;
-	}
+#about-us{
+  background-color: #333;
 }
 
+/* ------------------------
+	Section: Form
+--------------------------*/
+
+.intake {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    max-width: 40rem;
+    padding: 1.25rem;
+}
+
+.intake p, .intake label{
+  color: black;
+}
+
+.intake .btn {
+    margin-top: 1.25rem;
+    width: 100%;
+}
+
+.page2 {
+    min-height: 80vh;
+    max-width: 40rem;
+    margin: 0 auto 4rem;
+}
 
 /* ------------------------
 	Footer
@@ -158,6 +201,11 @@ header {
 
 footer {
 	background-color: #111;
+}
+
+.footer {
+    margin-top: 2rem;
+    text-align: center;
 }
 
 
@@ -169,4 +217,23 @@ footer {
 	.row {
 		padding: 0;
 	}
+}
+
+@media only screen and (min-width: 640px) {
+    /*body {
+        padding: 3rem;
+    }*/
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.25rem;
+    }
+
+    section {
+        margin-top: 2rem;
+        padding: 0 1.25rem;
+    }
 }
