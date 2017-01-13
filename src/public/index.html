@@ -6,41 +6,58 @@
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
         <!-- Latest compiled & minified Bootstrap via CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="./css/staywokeBootstrap.css">
         <link rel="stylesheet" href="./styles.css">
     </head>
     <body>
-        <section class="page page1">
-            <section class="header">
-                <h1>Intake Page 1 Title</h1>
-                <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
-            </section>
-            <section class="body">
-                <h2>Subsection 1</h2>
-                <p>Dolendit os ipsum dolendi etum, esequi veros elesequ ultrices atis enis lobortio iliquis utpat. </p>
-                <h2>Subsection 2</h2>
-                <p>Modoloreisl suscilla morbi. Vullandigna sandigna aliquis dolenim aciliquis dictum auguer lum si; erostin facillum mod acidunt in senectus. </p>
-                <h2>Subsection 3</h2>
-                <p>Eumsan quation dio, dunt gait, alisi sequat, im ligula habitasse ilis psusto. Nos enis stincil iliqui. Adionsed alis iscidunt commolor morbi, utetumm accumsan mi irit mod am essi justo accummy. </p>
-            </section>
-            <section class="scroll-down">
-                <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
-            </section>
-        </section>
+      <div class="container">
+        <div class="row">
+          <section class="header block--heading col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+              <h1 class="red-border-bottom">Join Us</h1>
+              <p>Commit to persistant action</p>
+          </section>
+        </div>
+      </div>
+      <section class="body" id="about-us">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-5 col-sm-offset-1 col-xs-12">
+              <h3 >What we are doing</h3>
+              <p>We are working to harness the energy and passion at protests and rallies to create a sustained and active force for social justice.</p>
+            </div>
+            <div class="col-sm-5 col-sm-offset-0 col-xs-12">
+              <h3>Why you should sign up</h3>
+              <p>By joining a campaign you are committing to remain engaged, and to use the power you have, and the voice you have, to stand up for our shared values and goals.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <a name="form"></a>
+      <section class="scroll-down">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+              <h3 class>What happens next</h3>
+              <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
+                <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <a name="form"></a>
+      <section class="form">
         <section class="page page2">
-            <section class="header">
-                <h1>Intake Page 2 Title</h1>
-                <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
+            <section class="header current-campaigns">
+              <div class="campaign-info">
+                <h1>(Anti) Inauguration</h1>
+                <p>You can text "____" to ____ to immediately connect to us.</p>
+                <p>Fill out the form to stay up to date on actions opposing the new administration's efforts to ruin everything. Already public pressure has reversed the GOP's attempt to gut the ethics committee. Let's continue this momentum. We are the majority.  </p>
+              </div>
             </section>
             <section class="intake">
-                <p>Congue aciliquis atis, faccummy aliqui ing vero commodolor dolesecte, nec eugiamconse conubia.</p>
-
+                <p>Fill out form below to stay connected to this campaign. We will only contact you when there is something you can do.</p>
                 <form action="submit" method="post">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -60,11 +77,15 @@
                     </div>
                 </form>
             </section>
+          </section>
         </section>
 
         <footer class="footer">
             <p>Other links here?</p>
         </footer>
-
+        <!-- Required JQuery via CDN -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <!-- Latest minified Bootstrap JS via CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </body>
 </html>
