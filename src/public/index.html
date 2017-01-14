@@ -7,9 +7,12 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
-        <!-- Latest compiled & minified Bootstrap via CDN -->
         <link rel="stylesheet" href="./css/staywokeBootstrap.css">
-        <link rel="stylesheet" href="./styles.css">
+        <script id="campaign-info-template" type="text/x-handlebars-template">
+          <h1>{{name}}</h1>
+          <p>You can text "____" to ____ to immediately connect to us.</p>
+          <p>{{description}}</p>
+        </script>
     </head>
     <body>
       <div class="container">
@@ -51,9 +54,7 @@
         <section class="page page2">
             <section class="header current-campaigns">
               <div class="campaign-info">
-                <h1>(Anti) Inauguration</h1>
-                <p>You can text "____" to ____ to immediately connect to us.</p>
-                <p>Fill out the form to stay up to date on actions opposing the new administration's efforts to ruin everything. Already public pressure has reversed the GOP's attempt to gut the ethics committee. Let's continue this momentum. We are the majority.  </p>
+                
               </div>
             </section>
             <section class="intake">
@@ -87,5 +88,9 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
         <!-- Latest minified Bootstrap JS via CDN -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="./handlebars.js"></script>
+        <script src="./campaign.js"></script>
+        <script src="./campaignView.js"></script>
+
     </body>
 </html>
