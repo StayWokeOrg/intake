@@ -1,12 +1,13 @@
 const http = require('http')
-const validateCampaign = require('../validate_campaign')
+const validateUser = require('./validate_user')
+const validateCampaign = require('./validate_campaign')
 const debug = require('debug')('user')
 
 module.exports = function saveUser(user, { source }) {
   return new Promise((resolve, reject) => {
     // validate user data
-    if (!user.name) return reject('user must have a name')
-    if (!user.email && !user.phone) return reject('user must have an email or a phone')
+    const invalid = validateUser(user)
+    if (invalid) return reject(invalid)
 
     // validate campaign
     const campaign = validateCampaign(user.campaign)
