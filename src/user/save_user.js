@@ -1,38 +1,11 @@
 const http = require('http')
 const validateUser = require('./validate_user')
 const validateCampaign = require('./validate_campaign')
+const encodeUser = require('./encode_user')
 const debug = require('debug')('user')
 
-module.exports = function saveUser(user, { source }) {
+function makeRequest(userData) {
   return new Promise((resolve, reject) => {
-    // validate user data
-    const invalid = validateUser(user)
-    if (invalid) return reject(invalid)
-
-    // validate campaign
-    const campaign = validateCampaign(user.campaign)
-    if (!campaign) return reject('user must have a campaign')
-
-    // validate source
-    if (!source) return reject('user must have a source')
-
-    // build data object for POST to central
-    const data = {
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      zip: user.zip,
-      campaign,
-      source,
-    }
-
-    // convert data to a query-encoded string key1=val1&key2=val2
-    const encodedData = (
-      Object.keys(data)
-      .map(key => `${key}=${data[key]}`)
-      .join('&')
-    )
-
     // options for http request
     const API_OPTIONS = {
       hostname: process.env.DATA_API,
@@ -47,7 +20,7 @@ module.exports = function saveUser(user, { source }) {
       },
     }
 
-    // make the request
+    // create the request
     const req = http.request(API_OPTIONS, (res) => {
       debug(`Status: ${res.statusCode}`)
       debug(`Headers: ${JSON.stringify(res.headers)}`)
@@ -59,14 +32,42 @@ module.exports = function saveUser(user, { source }) {
         resolve(body)
       })
     })
+
+    // if an error occurs, reject the promise
     req.on('error', (err) => {
       debug(`problem with request: ${err.message}`)
+      reject(err)
     })
 
     // send our data
-    req.write(encodedData)
+    req.write(userData)
 
     // end the request
     req.end()
+  })
+}
+
+module.exports = function saveUser({ user, source }) {
+  return new Promise((resolve, reject) => {
+    // validate user data
+    const invalid = validateUser(user)
+    if (invalid) return reject(invalid)
+
+    // validate campaign
+    const campaign = validateCampaign(user.campaign)
+    if (!campaign) return reject('user must have a campaign')
+
+    // validate source
+    if (!source) return reject('user must have a source')
+
+    // encode data
+    const userData = encodeUser({
+      user,
+      campaign,
+      source,
+    })
+
+    // make request
+    makeRequest(userData).then(resolve, reject)
   })
 }
