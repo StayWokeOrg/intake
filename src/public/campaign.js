@@ -1,11 +1,13 @@
+/* global $, Handlebars */
+/* eslint-disable no-var */
+/* eslint-disable comma-dangle */
+
 function Campaign(opts) {
-  for (key in opts) {
-    this[key] = opts[key]
-  }
+  this.data = opts
 }
 
 Campaign.prototype.toHtml = function toHtml(templateid) {
   var source = $(templateid).html()
   var renderTemplate = Handlebars.compile(source)
-  return renderTemplate(this)
+  return renderTemplate(this.data)
 }

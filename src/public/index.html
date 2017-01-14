@@ -1,100 +1,105 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>#StayWoke - Get Involved</title>
-        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
-        <link rel="stylesheet" href="./css/staywokeBootstrap.css">
-        <script id="campaign-info-template" type="text/x-handlebars-template">
-          <h1>{{name}}</h1>
-          <p>You can text "____" to ____ to immediately connect to us.</p>
-          <p>{{description}}</p>
-        </script>
-    </head>
-    <body>
-      <div class="container">
-        <div class="row">
-          <section class="header block--heading col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+
+  <head>
+    <meta charset="utf-8">
+    <title>#StayWoke - Get Involved</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
+    <script id="campaign-info-template" type="text/x-handlebars-template">
+      <h1 class="text-center">{{name}}</h1>
+      <h3 class="text-center">You can text "{{id}}" to ____<br>to immediately connect to us.</h3>
+      <p>{{description}}</p>
+    </script>
+    <link rel="stylesheet" href="./build/styles.css">
+  </head>
+
+  <body>
+    <div class="page page1">
+      <section>
+        <div class="container">
+          <div class="row">
+            <div class="header block--heading col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
               <h1 class="red-border-bottom">Join Us</h1>
-              <p>Commit to persistant action</p>
-          </section>
+              <p>Commit to persistent action</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
       <section class="body" id="about-us">
         <div class="container">
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1 col-xs-12">
-              <h3 >What we are doing</h3>
+              <h3>What we are doing</h3>
               <p>We are working to harness the energy and passion at protests and rallies to create a sustained and active force for social justice.</p>
             </div>
             <div class="col-sm-5 col-sm-offset-0 col-xs-12">
               <h3>Why you should sign up</h3>
-              <p>By joining a campaign you are committing to remain engaged, and to use the power you have, and the voice you have, to stand up for our shared values and goals.</p>
+              <p>By joining a campaign, you are committing to remain engaged, and to use the power you have, and the voice you have, to stand up for our shared values and goals.</p>
             </div>
           </div>
         </div>
       </section>
-
       <section class="scroll-down">
         <div class="container">
           <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+            <div class="col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 text-center">
               <h3 class>What happens next</h3>
-              <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
+              <p>We will contact with you concrete actions to take,<br>and ways to stay involved at both a local and national level.</p>
+              <p>
                 <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
+              <p>
             </div>
           </div>
         </div>
       </section>
-      <a name="form"></a>
-      <section class="form">
-        <section class="page page2">
-            <section class="header current-campaigns">
-              <div class="campaign-info">
+    </div>
 
-              </div>
-            </section>
-            <section class="intake">
-                <p>Fill out form below to stay connected to this campaign. We will only contact you when there is something you can do.</p>
-                <form action="submit" method="post">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control input-lg" type="text" name="name" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input class="form-control input-lg" type="email" name="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone number</label>
-                        <input class="form-control input-lg" type="phone" name="phone" id="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="zip">Zip</label>
-                        <input class="form-control input-lg" type="zip" name="zip" id="zip">
-                    </div>
-                    <input type="hidden" name="campaign" id="campaign" value="some_campaign">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
-                    </div>
-                </form>
-            </section>
-          </section>
-        </section>
+    <a name="form"></a>
+    <div class="page page2">
+      <section class="header current-campaigns">
+        <div class="campaign-info"></div>
+      </section>
+      <section class="intake">
+        <p>Fill out form below to stay connected to this campaign. We will only contact you when there is something you can do.</p>
+        <form action="submit" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control input-lg" type="text" name="name" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input class="form-control input-lg" type="email" name="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input class="form-control input-lg" type="phone" name="phone" id="phone">
+          </div>
+          <div class="form-group">
+            <label for="zip">Zip</label>
+            <input class="form-control input-lg" type="zip" name="zip" id="zip">
+          </div>
+          <input type="hidden" name="campaign" id="campaign" value="inauguration">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
+          </div>
+        </form>
+      </section>
+    </div>
 
-        <footer class="footer">
-            <p>Other links here?</p>
-        </footer>
-        <!-- Required JQuery via CDN -->
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-        <!-- Latest minified Bootstrap JS via CDN -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="./handlebars.js"></script>
-        <script src="./campaign.js"></script>
-        <script src="./campaignView.js"></script>
+    <footer>
+      <p>Other links here?</p>
+    </footer>
+    <!-- Required JQuery via CDN -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- Latest minified Bootstrap JS via CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="./handlebars.js"></script>
+    <script src="./campaign.js"></script>
+    <script src="./campaignView.js"></script>
 
-    </body>
+  </body>
+
 </html>
