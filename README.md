@@ -7,8 +7,16 @@ The goal: to capture the contact information for as many people who are attendin
 - `cp example_dot_env .env`
 - Open `.env` in your editor. You may need to fill in some values for your dev. See comments in that file.
 - `npm install`
+- `npm run build`
 - `npm start`
 - `open http://localhost:3030`
+
+## Updating the build
+If you’re making changes to styles.less, you can use `npm run build:watch` in a new shell and it will rebuild on every save.
+
+## Running tests
+- `npm test`
+- `npm run test:watch` to run continuously
 
 ## To test SMS
 
