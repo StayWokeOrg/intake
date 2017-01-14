@@ -23,20 +23,20 @@ describe('controller/sms/get_step_name:', () => {
       })
     })
     describe('if user.name exists', () => {
-      it('should return "email"', () => {
+      it('should return "zip"', () => {
         const user = {
           keyword: 'keyword',
           name: 'First Last',
         }
-        method(user).should.equal('email')
+        method(user).should.equal('zip')
       })
     })
-    describe('if user.email exists', () => {
+    describe('if user.zip exists', () => {
       it('should return "goodbye"', () => {
         const user = {
           keyword: 'keyword',
           name: 'First Last',
-          email: 'email@host.com',
+          zip: '12345',
         }
         method(user).should.equal('goodbye')
       })
