@@ -51,8 +51,20 @@ app.post('/sms', sms.dispatcher)
 // web app routes
 app.post('/submit', web.submit)
 
-// Production error handler
+// handler to redirect http requests to https in production
+function ensureSecure(req, res, next) {
+  if (req.secure) {
+    // OK, continue
+    return next()
+  }
+  res.redirect(`https://${req.hostname}${req.url}`)
+}
+
 if (app.get('env') === 'production') {
+  // redirect http requests to https
+  app.all('*', ensureSecure)
+
+  // production error handler
   app.use((err, req, res, next) => {
     console.error(err.stack)
     res.sendStatus(err.status || 500)
