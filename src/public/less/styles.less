@@ -56,11 +56,11 @@ body {
 	background-color: #000;
 }
 
-body, div, p, span, li, blockquote, small {
+body, div, p, ul, blockquote {
 	color: @color--text;
 	font-family: @font--body;
 	font-size: 16px;
-	line-height: 24px;
+	line-height: 1.5;
 }
 
 header, section, footer {
@@ -74,16 +74,15 @@ h1 {
 	font-family: @font--body;
 }
 h2 {
-	color: #ccc;
+    color: @color--text;
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 36px;
 	font-family: @font--body;
-	text-transform: uppercase;
 }
 h3 {
 	color: @color--text;
 	font-weight: 700;
-	font-size: 26px;
+	font-size: 28px;
 	font-family: @font--body;
 }
 h1,h2,h3,h4,h5,h6 {
@@ -141,8 +140,20 @@ body {
     left: 25%;
 }
 
+.pages {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
 section {
     padding: 1rem 0.5rem;
+}
+
+section.shadowed {
+    background-color: #333;
+    box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.2);
 }
 
 /* ------------------------
@@ -167,9 +178,7 @@ header {
 	background-color: #333;
 }
 
-#about-us{
-  background-color: #333;
-  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.2);
+#about-us {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -177,6 +186,11 @@ header {
 /* ------------------------
 	Section: Form
 --------------------------*/
+
+.page2 {
+    max-width: 40rem;
+    margin: 0 auto;
+}
 
 .intake {
     background-color: rgba(255, 255, 255, 0.8);
@@ -192,11 +206,6 @@ header {
 .intake .btn {
     margin-top: 1.25rem;
     width: 100%;
-}
-
-.page2 {
-    max-width: 40rem;
-    margin: 0 auto;
 }
 
 /* ------------------------
@@ -216,16 +225,24 @@ footer {
 
 @media only screen and (max-width: 640px) {
 
+    .col + .col {
+        margin-top: 1.5rem;
+    }
+
     .intake {
         border-radius: 0;
     }
 
     h1 {
-        font-size: 3rem;
+        font-size: 40px;
     }
 
     h2 {
-        font-size: 2.25rem;
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 24px;
     }
 
     section {
