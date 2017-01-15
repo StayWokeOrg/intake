@@ -13,7 +13,7 @@ module.exports = function config(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     clean: {
-      site: ['staywokeBootstrap.css'],
+      site: ['src/public/build/styles.css'],
     },
 
     less: {
