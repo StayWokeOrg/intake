@@ -26,7 +26,6 @@ const app = express()
 
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
-app.set('port', process.env.PORT)
 app.use(helmet())
 app.use(compression())
 app.use(session({
@@ -41,6 +40,28 @@ app.use(expressValidator())
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, './public')))
 
+// handler to redirect http requests to https in production
+// not working
+// function ensureSecure(req, res, next) {
+//   if (req.secure) {
+//     // OK, continue
+//     return next()
+//   }
+//   res.redirect(`https://${req.hostname}${req.url}`)
+// }
+
+if (app.get('env') === 'production') {
+  // redirect http requests to https
+  // not working
+  // app.all('/*', ensureSecure)
+
+  // production error handler
+  app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.sendStatus(err.status || 500)
+  })
+}
+
 // Controllers
 const sms = require('./controller/sms/sms')
 const web = require('./controller/web')
@@ -51,25 +72,6 @@ app.post('/sms', sms.dispatcher)
 // web app routes
 app.post('/submit', web.submit)
 
-// handler to redirect http requests to https in production
-function ensureSecure(req, res, next) {
-  if (req.secure) {
-    // OK, continue
-    return next()
-  }
-  res.redirect(`https://${req.hostname}${req.url}`)
-}
-
-if (app.get('env') === 'production') {
-  // redirect http requests to https
-  app.all('*', ensureSecure)
-
-  // production error handler
-  app.use((err, req, res, next) => {
-    console.error(err.stack)
-    res.sendStatus(err.status || 500)
-  })
-}
 
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`)
