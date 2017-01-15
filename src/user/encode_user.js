@@ -24,12 +24,5 @@ module.exports = function encodeUser({ user, campaign, source }) {
     if (!data[key]) delete data[key]
   })
 
-  // convert data to a query-encoded string key1=val1&key2=val2
-  const encodedData = (
-    Object.keys(data)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join('&')
-  )
-
-  return encodedData
+  return data
 }
