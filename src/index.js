@@ -26,6 +26,7 @@ const app = express()
 
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
+app.set('port', process.env.PORT)
 app.use(helmet())
 app.use(compression())
 app.use(session({
@@ -61,24 +62,5 @@ if (app.get('env') === 'production') {
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`)
 })
-
-
-// if ngrok auth token is defined, setup ngrok
-if (process.env.NGROK_AUTHTOKEN) {
-  // eslint-disable-next-line global-require
-  const ngrok = require('ngrok')
-  ngrok.authtoken(process.env.NGROK_AUTHTOKEN, (err, token) => {
-    if (err) debug(err)
-  })
-  ngrok.connect(app.get('port'), (err, url) => {
-    if (err) debug(err)
-    console.log('ngrok URL', url)
-  })
-}
-
-// ^ TODO(pascal): this doesn't work so well when running with nodemon; it tries
-// to restart ngrok on every change. I find it preferable to run ngrok manually
-// in a separate shell so the URL is persistent and I don't have to keep
-// reconfiguring twilio.
 
 module.exports = app
