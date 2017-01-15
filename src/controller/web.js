@@ -3,7 +3,9 @@ const debug = require('debug')('web')
 
 function submit(req, res) {
   // form data is in req.body
-  saveUser(req.body, {
+  const user = req.body
+  saveUser({
+    user,
     source: 'web',
   })
   .then((data) => {

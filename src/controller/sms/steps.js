@@ -50,7 +50,8 @@ const steps = {
         campaign: req.session.user.keyword,
       }
 
-      saveUser(user, {
+      saveUser({
+        user,
         source: 'sms',
       })
       .then((data) => {
