@@ -1,70 +1,110 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>#StayWoke - Get Involved</title>
-        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
-        <!-- Latest compiled & minified Bootstrap via CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8">
+    <title>#StayWoke - Get Involved</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
+    <script id="campaign-info-template" type="text/x-handlebars-template">
+      <h1 class="text-center">{{ name }} – Pledge to RESIST.</h1>
+      <h3 class="text-center balance-text">Text “{{id}}” to <span class="text-nowrap">{{number}}</span> to get involved immediately.</h3>
+      <p>{{description}}</p>
+    </script>
+    <link rel="stylesheet" href="./build/styles.css">
+  </head>
 
-        <link rel="stylesheet" href="./styles.css">
-    </head>
-    <body>
-        <section class="page page1">
-            <section class="header">
-                <h1>Intake Page 1 Title</h1>
-                <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
-            </section>
-            <section class="body">
-                <h2>Subsection 1</h2>
-                <p>Dolendit os ipsum dolendi etum, esequi veros elesequ ultrices atis enis lobortio iliquis utpat. </p>
-                <h2>Subsection 2</h2>
-                <p>Modoloreisl suscilla morbi. Vullandigna sandigna aliquis dolenim aciliquis dictum auguer lum si; erostin facillum mod acidunt in senectus. </p>
-                <h2>Subsection 3</h2>
-                <p>Eumsan quation dio, dunt gait, alisi sequat, im ligula habitasse ilis psusto. Nos enis stincil iliqui. Adionsed alis iscidunt commolor morbi, utetumm accumsan mi irit mod am essi justo accummy. </p>
-            </section>
-            <section class="scroll-down">
-                <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
-            </section>
+  <body>
+    <div class="pages">
+      <div class="page page1">
+        <section>
+          <div class="container">
+            <div class="row">
+              <div class="header block--heading col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
+                <h1 class="red-border-bottom">Join Us</h1>
+                <p>Commit to persistent action</p>
+              </div>
+            </div>
+          </div>
         </section>
+        <section class="shadowed" id="about-us">
+          <div class="container">
+            <div class="row">
+              <div class="col col-sm-4">
+                <h3 class="balance-text">What we are doing</h3>
+                <p>Together, we pledge to combine the energy and passion we create at protests and rallies to form an unrelenting force for social justice.</p>
+              </div>
+              <div class="col col-sm-4">
+                <h3 class="balance-text">Why you should sign up</h3>
+                <p>In joining this campaign, you commit to remaining engaged in using your voice and power to stand up for what is right.</p>
+              </div>
+              <div class="col col-sm-4">
+                <h3 class="balance-text">What happens next</h3>
+                <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="scroll-down text-center">
+            <p>
+              <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
+            <p>
+        </section>
+      </div>
 
+      <div class="page page2">
         <a name="form"></a>
-        <section class="page page2">
-            <section class="header">
-                <h1>Intake Page 2 Title</h1>
-                <p>Velis dolortis nim consenit eriurer, volutpat natoque dolese. </p>
-            </section>
-            <section class="intake">
-                <p>Congue aciliquis atis, faccummy aliqui ing vero commodolor dolesecte, nec eugiamconse conubia.</p>
-
-                <form action="submit" method="post">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control input-lg" type="text" name="name" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input class="form-control input-lg" type="email" name="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone number</label>
-                        <input class="form-control input-lg" type="phone" name="phone" id="phone">
-                    </div>
-                    <input type="hidden" name="campaign" id="campaign" value="some_campaign">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
-                    </div>
-                </form>
-            </section>
+        <section class="header current-campaigns">
+          <div class="campaign-info"></div>
         </section>
+        <section class="intake">
+          <p>Fill out form below to stay connected to this campaign. We will only contact you when there is something you can do.</p>
+          <form action="submit" method="post">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input class="form-control input-lg" type="text" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input class="form-control input-lg" type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone number</label>
+              <input class="form-control input-lg" type="phone" name="phone" id="phone">
+            </div>
+            <div class="form-group">
+              <label for="zip">Zip code</label>
+              <input class="form-control input-lg" type="number" name="zip" id="zip" required pattern="[0-9]{5}" title="Five-digit U.S. zip code">
+            </div>
+            <input type="hidden" name="campaign" id="campaign" value="inauguration">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
+            </div>
+          </form>
+        </section>
+      </div>
 
-        <footer class="footer">
-            <p>Other links here?</p>
-        </footer>
+      <footer>
+        <p>
+          <a href="http://staywoke.org/">#StayWoke</a> |
+          <a href="https://www.joincampaignzero.org/">CampaignZero</a>
+        </p>
+      </footer>
+    </div>
 
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
+    <script>
+      var view = new CampaignView({
+        templateId: '#campaign-info-template',
+        data: inauguration
+      })
+      view.renderTo('.campaign-info')
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
+  </body>
+
 </html>

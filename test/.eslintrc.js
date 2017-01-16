@@ -25,7 +25,10 @@ testConfig.plugins.push('disallow-methods')
 testConfig.rules = Object.assign({}, baseConfig.rules, {
   'no-unused-expressions': [
     OFF
-  ]
+  ],
+  'import/newline-after-import': [
+    OFF
+  ],
 })
 
 module.exports = testConfig

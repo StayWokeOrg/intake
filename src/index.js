@@ -40,6 +40,28 @@ app.use(expressValidator())
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, './public')))
 
+// handler to redirect http requests to https in production
+// not working
+// function ensureSecure(req, res, next) {
+//   if (req.secure) {
+//     // OK, continue
+//     return next()
+//   }
+//   res.redirect(`https://${req.hostname}${req.url}`)
+// }
+
+if (app.get('env') === 'production') {
+  // redirect http requests to https
+  // not working
+  // app.all('/*', ensureSecure)
+
+  // production error handler
+  app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.sendStatus(err.status || 500)
+  })
+}
+
 // Controllers
 const sms = require('./controller/sms/sms')
 const web = require('./controller/web')
@@ -50,35 +72,9 @@ app.post('/sms', sms.dispatcher)
 // web app routes
 app.post('/submit', web.submit)
 
-// Production error handler
-if (app.get('env') === 'production') {
-  app.use((err, req, res, next) => {
-    console.error(err.stack)
-    res.sendStatus(err.status || 500)
-  })
-}
 
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`)
 })
-
-
-// if ngrok auth token is defined, setup ngrok
-if (process.env.NGROK_AUTHTOKEN) {
-  // eslint-disable-next-line global-require
-  const ngrok = require('ngrok')
-  ngrok.authtoken(process.env.NGROK_AUTHTOKEN, (err, token) => {
-    if (err) debug(err)
-  })
-  ngrok.connect(app.get('port'), (err, url) => {
-    if (err) debug(err)
-    console.log('ngrok URL', url)
-  })
-}
-
-// ^ TODO(pascal): this doesn't work so well when running with nodemon; it tries
-// to restart ngrok on every change. I find it preferable to run ngrok manually
-// in a separate shell so the URL is persistent and I don't have to keep
-// reconfiguring twilio.
 
 module.exports = app

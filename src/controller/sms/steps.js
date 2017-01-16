@@ -15,19 +15,27 @@ const steps = {
   },
   'name': {
     before(req, res) {
-      res.send(message('Great! What’s your name?'))
+      res.send(message('✊🏾 Thank you for joining! 😀 What’s your name?'))
     },
     after(req, res) {
-      req.session.user.name = req.body.Body
+      // trim the name and collapse multiple spaces
+      req.session.user.name = req.body.Body.trim().replace(/ +/g, ' ')
       debug(req.session.user)
     },
   },
-  'email': {
+  'zip': {
     before(req, res) {
-      res.send(message(`Hi ${req.session.user.name}! What’s your email address?`))
+      // if they gave us a name, use it in the greeting
+      const firstName = req.session.user.name.split(' ')[0]
+      const greeting = (
+        firstName
+        ? `Hi ${firstName}! 😀 `
+        : ''
+      )
+      res.send(message(`${greeting}To connect with events in your area, enter your zip code.`))
     },
     after(req, res) {
-      req.session.user.email = req.body.Body
+      req.session.user.zip = req.body.Body
       debug(req.session.user)
     },
   },
@@ -35,27 +43,25 @@ const steps = {
     before(req, res) {
       const user = {
         name: req.session.user.name,
-        email: req.session.user.email,
+        // TODO(pascal): are we going to ask for email over SMS?
+        // email: req.session.user.email,
         phone: req.session.user.phone,
+        zip: req.session.user.zip,
         campaign: req.session.user.keyword,
-        // TODO(pascal): ^ are we going to use the initial SMS keyword as the
-        // campaign name?
       }
 
-      saveUser(user, {
+      saveUser({
+        user,
         source: 'sms',
       })
       .then((data) => {
-        // remove session properties so they start over again
-        req.session.user.name = null
-        req.session.user.email = null
-        req.session.user.phone = null
-        req.session.user.keyword = null
-
         res.send(message('Thanks for getting involved! We’ll be in touch soon.'))
       }, (reason) => {
         debug('error', reason)
       })
+    },
+    after(req, res) {
+      res.send(message('We’ll be in touch soon, we promise! ✊🏾'))
     },
   },
 }

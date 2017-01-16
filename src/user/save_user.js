@@ -1,12 +1,47 @@
-const http = require('http')
-const validateCampaign = require('../validate_campaign')
-const debug = require('debug')('user')
+const request = require('request')
+const validateUser = require('./validate_user')
+const validateCampaign = require('./validate_campaign')
+const encodeUser = require('./encode_user')
+const debug = require('debug')('user') // eslint-disable-line
 
-module.exports = function saveUser(user, { source }) {
+function makeCentralRequest(userData) {
+  return new Promise((resolve, reject) => {
+    // request url
+    const { DATA_API, DATA_API_PORT } = process.env
+    const url = `${DATA_API}:${DATA_API_PORT}/api/contacts`
+
+    // request options
+    const options = {
+      url,
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Cache-Control': 'no-cache',
+        'Authorization': `Bearer ${process.env.DATA_API_TOKEN}`,
+      },
+      json: true,
+      body: userData,
+    }
+
+    // create the request
+    request(options, (err, res, body) => {
+      if (err) {
+        debug(err)
+        reject(err)
+        return
+      }
+
+      debug(body)
+      resolve(body)
+    })
+  })
+}
+
+module.exports = function saveUser({ user, source }) {
   return new Promise((resolve, reject) => {
     // validate user data
-    if (!user.name) return reject('user must have a name')
-    if (!user.email && !user.phone) return reject('user must have an email or a phone')
+    const invalid = validateUser(user)
+    if (invalid) return reject(invalid)
 
     // validate campaign
     const campaign = validateCampaign(user.campaign)
@@ -15,56 +50,15 @@ module.exports = function saveUser(user, { source }) {
     // validate source
     if (!source) return reject('user must have a source')
 
-    // build data object for POST to central
-    const data = {
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
+    // encode data
+    const userData = encodeUser({
+      user,
       campaign,
       source,
-    }
-
-    // convert data to a query-encoded string key1=val1&key2=val2
-    const encodedData = (
-      Object.keys(data)
-      .map(key => `${key}=${data[key]}`)
-      .join('&')
-    )
-
-    // options for http request
-    const API_OPTIONS = {
-      hostname: process.env.DATA_API,
-      port: process.env.DATA_API_PORT,
-      path: '/api/contacts',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json',
-        'Cache-Control': 'no-cache',
-        'Authorization': `Bearer ${process.env.DATA_API_TOKEN}`,
-      },
-    }
-
-    // make the request
-    const req = http.request(API_OPTIONS, (res) => {
-      debug(`Status: ${res.statusCode}`)
-      debug(`Headers: ${JSON.stringify(res.headers)}`)
-      res.setEncoding('utf8')
-
-      // listen for the response data
-      res.on('data', (body) => {
-        debug(`Body: ${body}`)
-        resolve(body)
-      })
-    })
-    req.on('error', (err) => {
-      debug(`problem with request: ${err.message}`)
     })
 
-    // send our data
-    req.write(encodedData)
-
-    // end the request
-    req.end()
+    // make request
+    makeCentralRequest(userData)
+    .then(resolve, reject)
   })
 }

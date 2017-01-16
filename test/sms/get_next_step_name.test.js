@@ -15,11 +15,11 @@ describe('controller/sms/get_next_step_name:', () => {
       })
     })
     describe('if user.keyword exists', () => {
-      it('should return "email"', () => {
+      it('should return "zip"', () => {
         const user = {
           keyword: 'keyword',
         }
-        method(user).should.equal('email')
+        method(user).should.equal('zip')
       })
     })
     describe('if user.name exists', () => {
@@ -31,12 +31,12 @@ describe('controller/sms/get_next_step_name:', () => {
         method(user).should.equal('goodbye')
       })
     })
-    describe('if user.email exists', () => {
+    describe('if user.zip exists', () => {
       it('should return undefined', () => {
         const user = {
           keyword: 'keyword',
           name: 'First Last',
-          email: 'email@host.com',
+          zip: '12345',
         }
         expect(method(user)).to.be.undefined
       })
