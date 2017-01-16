@@ -28,30 +28,27 @@ describe('encode_user:', () => {
         user: makeUser(),
         source: 'web',
         campaign: 'campaign',
-        expected: 'name=First%20Last&email=email%40domain.com&phone=1234567890&zip=12345&campaign=campaign&source=web',
+        expected: { 'name': 'First Last', 'email': 'email@domain.com', 'phone': '1234567890', 'zip': '12345', 'campaign': 'campaign', 'source': 'web' },
+        expectedDescription: 'object with all properties',
       },
       {
         description: 'user with no phone',
         user: makeUserWithout('phone'),
         source: 'web',
         campaign: 'campaign',
-        expected: 'name=First%20Last&email=email%40domain.com&zip=12345&campaign=campaign&source=web',
+        expected: { 'name': 'First Last', 'email': 'email@domain.com', 'zip': '12345', 'campaign': 'campaign', 'source': 'web' },
+        expectedDescription: 'object without empty phone property',
       },
     ]
     examples.forEach((example) => {
       describe(`${example.description}`, () => {
-        const expectedDescription = (
-          typeof example.expected === 'string'
-          ? `"${example.expected}"`
-          : typeof example.expected
-        )
-        it(`should return ${expectedDescription}`, () => {
+        it(`should return ${example.expectedDescription}`, () => {
           const result = encodeUser({
             user: example.user,
             source: example.source,
             campaign: example.campaign,
           })
-          expect(result).to.equal(example.expected)
+          expect(result).to.eql(example.expected)
         })
       })
     })
