@@ -8,7 +8,7 @@
 // TODO(pascal): figure out better linting for client-side JS
 
 // TODO(pascal): get a real number
-var NUMBER = '123-456-7890'
+var NUMBER = '678-RESISTS (678-737-4787)'
 
 
 /**
