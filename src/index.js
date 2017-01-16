@@ -77,8 +77,17 @@ app.post('/sms', sms.dispatcher)
 app.post('/submit', web.submit)
 
 
-app.listen(app.get('port'), () => {
-  console.log(`Express server listening on port ${app.get('port')}`)
-})
+// Break if vars not set
+if(process.env.SESSION_SECRET && process.env.DATA_API && process.env.DATA_API_PORT && process.env.DATA_API_TOKEN) { 
+  app.listen(app.get('port'), () => {
+    console.log(`Express server listening on port ${app.get('port')}`)
+  })
+}
+else { 
+  app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.sendStatus(err.status || 500)
+  })
+}
 
 module.exports = app
