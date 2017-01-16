@@ -16,6 +16,7 @@ const expressValidator = require('express-validator')
 const session = require('express-session')
 const MemoryStore = require('session-memory-store')(session)
 const debug = require('debug')('app') // eslint-disable-line
+const favicon = require('serve-favicon');
 
 if (!process.env.PORT) {
   console.log('Please `cp example_dot_env .env` to create your .env file.')
@@ -27,6 +28,7 @@ const app = express()
 
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(helmet())
 app.use(compression())
 app.use(session({
