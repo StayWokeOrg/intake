@@ -14,6 +14,7 @@ const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const session = require('express-session')
+const MemoryStore = require('session-memory-store')(session)
 const debug = require('debug')('app') // eslint-disable-line
 
 if (!process.env.PORT) {
@@ -32,6 +33,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  store: new MemoryStore(),
 }))
 app.use(logger('dev'))
 app.use(bodyParser.json())
