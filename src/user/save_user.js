@@ -1,49 +1,39 @@
-const http = require('http')
+const request = require('request')
 const validateUser = require('./validate_user')
 const validateCampaign = require('./validate_campaign')
 const encodeUser = require('./encode_user')
-const debug = require('debug')('user')
+const debug = require('debug')('user') // eslint-disable-line
 
-function makeRequest(userData) {
+function makeCentralRequest(userData) {
   return new Promise((resolve, reject) => {
-    // options for http request
-    const API_OPTIONS = {
-      hostname: process.env.DATA_API,
-      port: process.env.DATA_API_PORT,
-      path: '/api/contacts',
+    // request url
+    const { DATA_API, DATA_API_PORT } = process.env
+    const url = `${DATA_API}:${DATA_API_PORT}/api/contacts`
+
+    // request options
+    const options = {
+      url,
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': 'application/json',
         'Cache-Control': 'no-cache',
         'Authorization': `Bearer ${process.env.DATA_API_TOKEN}`,
       },
+      json: true,
+      body: userData,
     }
 
     // create the request
-    const req = http.request(API_OPTIONS, (res) => {
-      debug(`Status: ${res.statusCode}`)
-      debug(`Headers: ${JSON.stringify(res.headers)}`)
-      res.setEncoding('utf8')
+    request(options, (err, res, body) => {
+      if (err) {
+        debug(err)
+        reject(err)
+        return
+      }
 
-      // listen for the response data
-      res.on('data', (body) => {
-        debug(`Body: ${body}`)
-        resolve(body)
-      })
+      debug(body)
+      resolve(body)
     })
-
-    // if an error occurs, reject the promise
-    req.on('error', (err) => {
-      debug(`problem with request: ${err.message}`)
-      reject(err)
-    })
-
-    // send our data
-    req.write(userData)
-
-    // end the request
-    req.end()
   })
 }
 
@@ -68,6 +58,7 @@ module.exports = function saveUser({ user, source }) {
     })
 
     // make request
-    makeRequest(userData).then(resolve, reject)
+    makeCentralRequest(userData)
+    .then(resolve, reject)
   })
 }

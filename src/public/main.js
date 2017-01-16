@@ -50,6 +50,6 @@ var inauguration = {
   id: 'inauguration',
   name: '(Anti) Inauguration',
   number: NUMBER,
-  description: 'Or, fill out the form below to stay up to date on actions opposing the new administration’s efforts to ruin everything. Already public pressure has reversed the GOP’s attempt to gut the ethics committee. Let’s continue this momentum. We are the majority.',
+  description: 'Or, fill out the form below to stay connected with the movement. Already public pressure has reversed the Republican Party\'s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
   url: 'staywoke/inauguration'
 }
