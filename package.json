@@ -25,6 +25,7 @@
   "homepage": "https://github.com/stayworkorg/intake#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
     "compression": "^1.6.2",
     "debug": "^2.6.0",
