@@ -11,7 +11,7 @@ describe('validate_campaign:', () => {
       { value: null, description: 'null', expected: false },
       { value: undefined, description: 'undefined', expected: false },
       { value: '', description: 'empty string', expected: false },
-      { value: 'inauguration', expected: 'inauguration' },
+      { value: 'in', expected: 'in' },
       { value: 'random', expected: 'unknown:random' },
     ]
     examples.forEach((example) => {
