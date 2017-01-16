@@ -129,16 +129,18 @@ body {
     font-size: 1.125em;
 }
 
-.red-border-bottom:before {
-    position: absolute;
-    margin: auto;
-    z-index: 1;
-    content: "";
-    width: 50%;
-    height: 5px;
-    background: #db2b39;
-    bottom: 38px;
-    left: 25%;
+.red-border-bottom {
+    position: relative;
+    &::after {
+        position: absolute;
+        margin: auto;
+        content: "";
+        width: 50%;
+        height: 5px;
+        background: #db2b39;
+        bottom: -5px;
+        left: 25%;
+    }
 }
 
 .pages {
