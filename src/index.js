@@ -17,7 +17,7 @@ const session = require('express-session')
 const MemoryStore = require('session-memory-store')(session)
 const debug = require('debug')('app') // eslint-disable-line
 const favicon = require('serve-favicon')
-const enforce = require('express-sslify')
+// const enforce = require('express-sslify')
 
 if (!process.env.PORT) {
   console.log('Please `cp example_dot_env .env` to create your .env file.')
@@ -33,7 +33,8 @@ app.set('port', process.env.PORT)
 // production middleware
 if (app.get('env') === 'production') {
   // redirect http requests to https
-  app.use(enforce.HTTPS())
+  // not working, causes 'too many redirects' error
+  // app.use(enforce.HTTPS())
 
   // production error handler
   app.use((err, req, res, next) => {
