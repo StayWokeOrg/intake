@@ -77,7 +77,7 @@
               <label for="zip">Zip code</label>
               <input class="form-control input-lg" type="number" name="zip" id="zip" required pattern="[0-9]{5}" title="Five-digit U.S. zip code">
             </div>
-            <input type="hidden" name="campaign" id="campaign" value="inauguration">
+            <input type="hidden" name="campaign" id="campaign">
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
             </div>
@@ -102,6 +102,9 @@
         data: inauguration
       })
       view.renderTo('.campaign-info')
+
+      // set the campaign in the form input
+      $('input#campaign').val(inauguration.id)
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
   </body>

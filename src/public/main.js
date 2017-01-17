@@ -47,7 +47,7 @@ CampaignView.prototype = {
 
 // campaign data object, used on both pages
 var inauguration = {
-  id: 'in',
+  id: 'ready',
   name: '(Anti) Inauguration',
   number: NUMBER,
   description: 'Or, fill out the form below to stay connected with the movement. Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
