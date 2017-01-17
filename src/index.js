@@ -69,17 +69,18 @@ app.post('/sms', sms.dispatcher)
 // web app routes
 app.post('/submit', web.submit)
 
-// if (app.get('env') === 'production') {
 app.post('/dockerhub', (req, res) => {
-  // if (req.body.tag === 'latest') {
-  //
-  // }
-  childProcess.exec(`../bin/docker.sh ${req.body.tag}`, (error, stdout, stderr) => {
+  const tag = req.body.tag
+  const cmd = `sh ${path.join(__dirname, '../bin/docker.sh')} ${tag}`
+  debug('cmd', cmd)
+
+  childProcess.exec(cmd, (error, stdout, stderr) => {
     debug(`stdout: ${stdout}`)
     debug(`stderr: ${stderr}`)
     if (error !== null) {
       debug(`exec error: ${error}`)
     }
+    res.status(200).send('OK')
   })
 })
 
