@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
     <script id="success-info-template" type="text/x-handlebars-template">
       <h2 class="text-center balance-text">You are now a member of the {{name}} campaign!</h1>
-      <p class="text-center">Thanks for getting involved! We’ll let you know when there are actions happening in your area.</p>
+      <p class="text-center balance-text">Thanks for getting involved! We’ll let you know when there are actions happening in your area.</p>
     </script>
     <link rel="stylesheet" href="./build/styles.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
@@ -19,21 +19,11 @@
   <body>
     <div class="pages">
       <div class="page page1">
-        <section class="text-center">
-          <div class="row">
-            <div class="header block--heading col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
-              <h1 class="balance-text">Thank you for taking action!</h1>
-            </div>
-          </div>
-        </section>
-        <section>
+        <section class="header">
           <div class="container">
             <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                <blockquote>
-                  Life, liberty, and the pursuit of happiness…while self-evident, have never been self-executing.
-                  <small>Barack Obama</small>
-                </blockquote>
+              <div class="text-center">
+                <img src="./img/stay-woke-logo-white.png" alt="#StayWoke" class="logo">
               </div>
             </div>
           </div>
@@ -41,7 +31,20 @@
         <section class="shadowed">
           <div class="container">
             <div class="row">
+              <h1 class="text-center balance-text thank-you-header">Thank you for taking action!</h1>
               <div class="col-md-8 col-md-offset-2 success-info"></div>
+            </div>
+          </div>
+        </section>
+        <section class="quote">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <blockquote class="balance-text">
+                  Life, liberty, and the pursuit of happiness…while <span class="text-nowrap">self-evident</span>, have never been self-executing.
+                  <small>Barack Obama</small>
+                </blockquote>
+              </div>
             </div>
           </div>
         </section>
