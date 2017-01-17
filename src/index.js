@@ -7,6 +7,7 @@ dotenv.load()
 
 const express = require('express')
 const path = require('path')
+const childProcess = require('child_process')
 const helmet = require('helmet')
 const logger = require('morgan')
 const compression = require('compression')
@@ -26,7 +27,6 @@ if (!process.env.PORT) {
 }
 
 const app = express()
-
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
 
@@ -69,8 +69,18 @@ app.post('/sms', sms.dispatcher)
 // web app routes
 app.post('/submit', web.submit)
 
+// if (app.get('env') === 'production') {
 app.post('/dockerhub', (req, res) => {
-  debug(req.body)
+  // if (req.body.tag === 'latest') {
+  //
+  // }
+  childProcess.exec(`../bin/docker.sh ${req.body.tag}`, (error, stdout, stderr) => {
+    debug(`stdout: ${stdout}`)
+    debug(`stderr: ${stderr}`)
+    if (error !== null) {
+      debug(`exec error: ${error}`)
+    }
+  })
 })
 
 app.listen(app.get('port'), () => {
