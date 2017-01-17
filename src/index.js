@@ -69,6 +69,10 @@ app.post('/sms', sms.dispatcher)
 // web app routes
 app.post('/submit', web.submit)
 
+app.post('/dockerhub', (req, res) => {
+  debug(req.body)
+})
+
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`)
 })
