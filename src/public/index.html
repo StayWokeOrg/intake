@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
     <script id="campaign-text-info-template" type="text/x-handlebars-template">
-      <h3 class="text-center balance-text">Text “{{id}}” to <span class="text-nowrap">{{number}}</span> to get involved immediately.</h3>
+      <h3 class="text-center balance-text">Text “{{id}}” to <span class="text-nowrap">{{number}}</span> <span class="text-nowrap">or join below.</span></h3>
     </script>
     <script id="campaign-description-template" type="text/x-handlebars-template">
       <p>{{description}}</p>
@@ -37,9 +37,12 @@
           <h1 class="text-center">Pledge to RESIST.</h1>
           <div class="campaign-text-info"></div>
         </section>
-        <section class="scroll-down text-center">
+        <section class="scroll-to-form text-center">
             <p>
-              <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-down"></a>
+              <a href="#form" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                <span>Join Now</span>
+              </a>
             <p>
         </section>
       </div>
@@ -73,7 +76,9 @@
             </div>
             <input type="hidden" name="campaign" id="campaign">
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
+              <button type="submit" class="btn btn-primary btn-lg">
+                <span>Get Involved</span>
+                <span class="glyphicon glyphicon-chevron-right"></span></button>
             </div>
           </form>
         </section>
@@ -98,9 +103,12 @@
             </div>
           </div>
         </section>
-        <section class="scroll-up text-center">
+        <section class="scroll-to-form text-center">
             <p>
-              <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-up"></a>
+              <a href="#form" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+                <span>Join Now</span>
+              </a>
             <p>
         </section>
       </div>
