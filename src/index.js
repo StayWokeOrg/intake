@@ -29,22 +29,8 @@ const app = express()
 
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
-app.use(favicon(__dirname + '/public/img/favicon.ico'))
-app.use(helmet())
-app.use(compression())
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  store: new MemoryStore(),
-}))
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(expressValidator())
-app.use(methodOverride('_method'))
-app.use(express.static(path.join(__dirname, './public')))
 
+// production middleware
 if (app.get('env') === 'production') {
   // redirect http requests to https
   app.use(enforce.HTTPS())
@@ -56,6 +42,22 @@ if (app.get('env') === 'production') {
   })
 }
 
+app.use(helmet())
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: new MemoryStore(),
+}))
+app.use(compression())
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(expressValidator())
+app.use(methodOverride('_method'))
+app.use(favicon(path.join(__dirname, './public/img/favicon.ico')))
+app.use(express.static(path.join(__dirname, './public')))
+
 // Controllers
 const sms = require('./controller/sms/sms')
 const web = require('./controller/web')
@@ -65,7 +67,6 @@ app.post('/sms', sms.dispatcher)
 
 // web app routes
 app.post('/submit', web.submit)
-
 
 app.listen(app.get('port'), () => {
   console.log(`Express server listening on port ${app.get('port')}`)
