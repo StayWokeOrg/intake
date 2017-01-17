@@ -33,7 +33,7 @@ app.set('port', process.env.PORT)
 // production middleware
 if (app.get('env') === 'production') {
   // redirect http requests to https
-  app.use(enforce.HTTPS())
+  app.all(enforce.HTTPS())
 
   // production error handler
   app.use((err, req, res, next) => {
@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator())
 app.use(methodOverride('_method'))
 app.use(favicon(path.join(__dirname, './public/img/favicon.ico')))
-app.use(express.static(path.join(__dirname, './public')))
+app.use(express.static(path.join(__dirname, './public'), { redirect: false}))
 
 // Controllers
 const sms = require('./controller/sms/sms')
