@@ -1,6 +1,4 @@
-const validCampaigns = [
-  'inauguration',
-]
+const validCampaigns = require('./valid_campaigns')
 
 /**
  * validateCampaign - validate campaign string

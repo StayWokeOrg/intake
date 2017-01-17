@@ -8,44 +8,34 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
-    <script id="campaign-info-template" type="text/x-handlebars-template">
-      <h1 class="text-center">{{ name }} – Pledge to RESIST.</h1>
+    <script id="campaign-text-info-template" type="text/x-handlebars-template">
       <h3 class="text-center balance-text">Text “{{id}}” to <span class="text-nowrap">{{number}}</span> to get involved immediately.</h3>
+    </script>
+    <script id="campaign-description-template" type="text/x-handlebars-template">
       <p>{{description}}</p>
     </script>
+    <script id="campaign-name-template" type="text/x-handlebars-template">
+      <h3 class="balance-text">The {{name}} Campaign</h3>
+    </script>
     <link rel="stylesheet" href="./build/styles.css">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
   </head>
 
   <body>
     <div class="pages">
       <div class="page page1">
-        <section>
+        <section class="header">
           <div class="container">
             <div class="row">
-              <div class="header block--heading col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 text-center">
-                <h1 class="red-border-bottom">Join Us</h1>
-                <p>Commit to persistent action</p>
+              <div class="text-center">
+                <img src="./img/stay-woke-logo-white.png" alt="#StayWoke" class="logo">
               </div>
             </div>
           </div>
         </section>
-        <section class="shadowed" id="about-us">
-          <div class="container">
-            <div class="row">
-              <div class="col col-sm-4">
-                <h3 class="balance-text">What we are doing</h3>
-                <p>Together, we pledge to combine the energy and passion we create at protests and rallies to form an unrelenting force for social justice.</p>
-              </div>
-              <div class="col col-sm-4">
-                <h3 class="balance-text">Why you should sign up</h3>
-                <p>In joining this campaign, you commit to remaining engaged in using your voice and power to stand up for what is right.</p>
-              </div>
-              <div class="col col-sm-4">
-                <h3 class="balance-text">What happens next</h3>
-                <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
-              </div>
-            </div>
-          </div>
+        <section class="shadowed">
+          <h1 class="text-center">Pledge to RESIST.</h1>
+          <div class="campaign-text-info"></div>
         </section>
         <section class="scroll-down text-center">
             <p>
@@ -56,19 +46,21 @@
 
       <div class="page page2">
         <a name="form"></a>
-        <section class="header current-campaigns">
-          <div class="campaign-info"></div>
+        <section>
+          <div class="campaign-description"></div>
         </section>
         <section class="intake">
-          <p>Fill out form below to stay connected to this campaign. We will only contact you when there is something you can do.</p>
+          <div class="campaign-name"></div>
           <form action="submit" method="post">
             <div class="form-group">
               <label for="name">Name</label>
               <input class="form-control input-lg" type="text" name="name" id="name" required>
+              <span class="label label-danger hidden">Please include your name</span>
             </div>
             <div class="form-group">
               <label for="email">Email address</label>
               <input class="form-control input-lg" type="email" name="email" id="email" required>
+              <span class="label label-danger hidden">Please include a valid email address</span>
             </div>
             <div class="form-group">
               <label for="phone">Phone number</label>
@@ -77,12 +69,39 @@
             <div class="form-group">
               <label for="zip">Zip code</label>
               <input class="form-control input-lg" type="number" name="zip" id="zip" required pattern="[0-9]{5}" title="Five-digit U.S. zip code">
+              <span class="label label-danger hidden">Please include your 5-digit zip code</span>
             </div>
-            <input type="hidden" name="campaign" id="campaign" value="inauguration">
+            <input type="hidden" name="campaign" id="campaign">
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-lg">Get Involved</button>
             </div>
           </form>
+        </section>
+      </div>
+
+      <div class="page page3">
+        <section class="shadowed">
+          <div class="container">
+            <div class="row">
+              <div class="col col-sm-4">
+                <h3 class="balance-text">What we are doing</h3>
+                <p>Together, we pledge to combine the energy and passion we create at protests and rallies to form an unrelenting force for social justice.</p>
+              </div>
+              <div class="col col-sm-4">
+                <h3 class="balance-text">Why you should sign up</h3>
+                <p>By joining this campaign, you commit to remaining engaged in using your voice and power to stand up for what is right.</p>
+              </div>
+              <div class="col col-sm-4">
+                <h3 class="balance-text">What happens next</h3>
+                <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="scroll-up text-center">
+            <p>
+              <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-up"></a>
+            <p>
         </section>
       </div>
 
@@ -98,12 +117,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
     <script>
-      var view = new CampaignView({
-        templateId: '#campaign-info-template',
-        data: inauguration
+      // set the campaign once
+      var campaign = inauguration
+
+      var textView = new CampaignView({
+        templateId: '#campaign-text-info-template',
+        data: campaign
       })
-      view.renderTo('.campaign-info')
+      textView.renderTo('.campaign-text-info')
+
+      var descriptionView = new CampaignView({
+        templateId: '#campaign-description-template',
+        data: campaign
+      })
+      descriptionView.renderTo('.campaign-description')
+
+      var nameView = new CampaignView({
+        templateId: '#campaign-name-template',
+        data: campaign
+      })
+      nameView.renderTo('.campaign-name')
+
+      // set the campaign in the form input
+      $('input#campaign').val(campaign.id)
     </script>
+    <script src="./form-validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
   </body>
 
