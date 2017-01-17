@@ -1,15 +1,16 @@
 /* env browser */
 /* global window */
+/* eslint-disable strict */
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
 /* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
 /* eslint-disable no-throw-literal */
-(function($) {
+(function closure($) {
   'use strict'
 
   // form validation vars
-  var $form = $('#form')
+  var $form = $('.intake form')
   var $name = $('#name')
   var $email = $('#email')
 
@@ -79,15 +80,15 @@
   $form.attr('novalidate', 'true')
 
   // wire up event listeners
-  $requiredFields.on('blur', function() {
+  $requiredFields.on('blur', function onBlur() {
     validateField(this)
   })
 
-  $form.on('submit', function(e) {
+  $form.on('submit', (e) => {
     // safari doesn't validate on submit, hence the dance here
     // https://bugs.webkit.org/show_bug.cgi?id=164382 >:(
     if (!nativeValidation || !$form[0].checkValidity()) {
-      $requiredFields.each(function(i, required) {
+      $requiredFields.each((i, required) => {
         validateField(required)
       })
 
@@ -100,4 +101,4 @@
       }
     }
   })
-})(window.jQuery)
+}(window.jQuery))
