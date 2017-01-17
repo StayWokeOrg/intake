@@ -8,10 +8,14 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
-    <script id="campaign-info-template" type="text/x-handlebars-template">
-      <h1 class="text-center">Pledge to RESIST.</h1>
+    <script id="campaign-text-info-template" type="text/x-handlebars-template">
       <h3 class="text-center balance-text">Text “{{id}}” to <span class="text-nowrap">{{number}}</span> to get involved immediately.</h3>
+    </script>
+    <script id="campaign-description-template" type="text/x-handlebars-template">
       <p>{{description}}</p>
+    </script>
+    <script id="campaign-name-template" type="text/x-handlebars-template">
+      <h3 class="balance-text">{{name}}</h3>
     </script>
     <link rel="stylesheet" href="./build/styles.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
@@ -30,22 +34,8 @@
           </div>
         </section>
         <section class="shadowed">
-          <div class="container">
-            <div class="row">
-              <div class="col col-sm-4">
-                <h3 class="balance-text">What we are doing</h3>
-                <p>Together, we pledge to combine the energy and passion we create at protests and rallies to form an unrelenting force for social justice.</p>
-              </div>
-              <div class="col col-sm-4">
-                <h3 class="balance-text">Why you should sign up</h3>
-                <p>In joining this campaign, you commit to remaining engaged in using your voice and power to stand up for what is right.</p>
-              </div>
-              <div class="col col-sm-4">
-                <h3 class="balance-text">What happens next</h3>
-                <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
-              </div>
-            </div>
-          </div>
+          <h1 class="text-center">Pledge to RESIST.</h1>
+          <div class="campaign-text-info"></div>
         </section>
         <section class="scroll-down text-center">
             <p>
@@ -56,11 +46,11 @@
 
       <div class="page page2">
         <a name="form"></a>
-        <section class="header current-campaigns">
-          <div class="campaign-info"></div>
+        <section>
+          <div class="campaign-description"></div>
         </section>
         <section class="intake">
-          <h3>The (Anti) Inauguration Campaign</h3>
+          <div class="campaign-name"></div>
           <form action="submit" method="post">
             <div class="form-group">
               <label for="name">Name</label>
@@ -89,6 +79,32 @@
         </section>
       </div>
 
+      <div class="page page3">
+        <section class="shadowed">
+          <div class="container">
+            <div class="row">
+              <div class="col col-sm-4">
+                <h3 class="balance-text">What we are doing</h3>
+                <p>Together, we pledge to combine the energy and passion we create at protests and rallies to form an unrelenting force for social justice.</p>
+              </div>
+              <div class="col col-sm-4">
+                <h3 class="balance-text">Why you should sign up</h3>
+                <p>In joining this campaign, you commit to remaining engaged in using your voice and power to stand up for what is right.</p>
+              </div>
+              <div class="col col-sm-4">
+                <h3 class="balance-text">What happens next</h3>
+                <p>We will contact with you concrete actions to take, and ways to stay involved at both a local and national level.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="scroll-up text-center">
+            <p>
+              <a href="#form" class="btn btn-primary btn-lg glyphicon glyphicon-chevron-up"></a>
+            <p>
+        </section>
+      </div>
+
       <footer>
         <p>
           <a href="http://staywoke.org/">#StayWoke</a> |
@@ -101,15 +117,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
     <script>
-      var view = new CampaignView({
-        templateId: '#campaign-info-template',
-        data: inauguration
-      })
+      // set the campaign once
+      var campaign = inauguration
 
-      view.renderTo('.campaign-info')
+      var textView = new CampaignView({
+        templateId: '#campaign-text-info-template',
+        data: campaign
+      })
+      textView.renderTo('.campaign-text-info')
+
+      var descriptionView = new CampaignView({
+        templateId: '#campaign-description-template',
+        data: campaign
+      })
+      descriptionView.renderTo('.campaign-description')
+
+      var nameView = new CampaignView({
+        templateId: '#campaign-name-template',
+        data: campaign
+      })
+      nameView.renderTo('.campaign-name')
 
       // set the campaign in the form input
-      $('input#campaign').val(inauguration.id)
+      $('input#campaign').val(campaign.id)
     </script>
     <script src="./form-validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
