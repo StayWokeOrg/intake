@@ -16,6 +16,8 @@ const expressValidator = require('express-validator')
 const session = require('express-session')
 const MemoryStore = require('session-memory-store')(session)
 const debug = require('debug')('app') // eslint-disable-line
+const favicon = require('serve-favicon')
+const enforce = require('express-sslify')
 
 if (!process.env.PORT) {
   console.log('Please `cp example_dot_env .env` to create your .env file.')
@@ -27,6 +29,7 @@ const app = express()
 
 app.set('view engine', 'html')
 app.set('port', process.env.PORT)
+app.use(favicon(__dirname + '/public/img/favicon.ico'))
 app.use(helmet())
 app.use(compression())
 app.use(session({
@@ -42,20 +45,9 @@ app.use(expressValidator())
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, './public')))
 
-// handler to redirect http requests to https in production
-// not working
-// function ensureSecure(req, res, next) {
-//   if (req.secure) {
-//     // OK, continue
-//     return next()
-//   }
-//   res.redirect(`https://${req.hostname}${req.url}`)
-// }
-
 if (app.get('env') === 'production') {
   // redirect http requests to https
-  // not working
-  // app.all('/*', ensureSecure)
+  app.use(enforce.HTTPS())
 
   // production error handler
   app.use((err, req, res, next) => {
