@@ -65,10 +65,12 @@
             <div class="form-group">
               <label for="name">Name</label>
               <input class="form-control input-lg" type="text" name="name" id="name" required>
+              <span class="label label-danger hidden">Please include your name</span>
             </div>
             <div class="form-group">
               <label for="email">Email address</label>
               <input class="form-control input-lg" type="email" name="email" id="email" required>
+              <span class="label label-danger hidden">Please include a valid email address</span>
             </div>
             <div class="form-group">
               <label for="phone">Phone number</label>
@@ -77,6 +79,7 @@
             <div class="form-group">
               <label for="zip">Zip code</label>
               <input class="form-control input-lg" type="number" name="zip" id="zip" required pattern="[0-9]{5}" title="Five-digit U.S. zip code">
+              <span class="label label-danger hidden">Please include your 5-digit zip code</span>
             </div>
             <input type="hidden" name="campaign" id="campaign">
             <div class="form-group">
@@ -102,11 +105,13 @@
         templateId: '#campaign-info-template',
         data: inauguration
       })
+
       view.renderTo('.campaign-info')
 
       // set the campaign in the form input
       $('input#campaign').val(inauguration.id)
     </script>
+    <script src="./form-validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
   </body>
 
