@@ -33,7 +33,7 @@ app.set('port', process.env.PORT)
 // production middleware
 if (app.get('env') === 'production') {
   // redirect http requests to https
-  app.all(enforce.HTTPS())
+  app.use(enforce.HTTPS())
 
   // production error handler
   app.use((err, req, res, next) => {
