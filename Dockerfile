@@ -1,6 +1,6 @@
 FROM node:6-onbuild
 
-CMD apt-get update && apt-get install nano
+RUN export $TERM=xterm
 
 RUN echo "PORT=3030" > .env
 

@@ -1,3 +1,5 @@
 #/bin/sh
 
-echo "hello world from docker: $1";
+echo "Pulling docker image for staywoke/intake:$1...";
+
+docker pull staywoke/intake:$1;
