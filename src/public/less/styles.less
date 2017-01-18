@@ -67,7 +67,7 @@ body {
 }
 
 header, section, footer {
-	padding: 50px 0;
+    padding: 1rem 1.25rem;
 }
 
 h1 {
@@ -146,10 +146,6 @@ a {
     margin-top: 2rem;
 }
 
-section {
-    padding: 1rem 0.5rem;
-}
-
 section.shadowed {
     background-color: #333;
     box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.2);
@@ -158,6 +154,11 @@ section.shadowed {
 /* ------------------------
 	Header
 --------------------------*/
+
+header {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 .logo {
     max-width: 300px;
@@ -244,7 +245,23 @@ footer {
         font-size: 24px;
     }
 
-    section {
-        padding: 1rem 1.25rem;
+}
+
+// optimize first screen for smaller phones
+@media only screen and (max-width: 640px) and (max-height: 640px) {
+    // first page should fill a screen on mobile
+    .page.pledge-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .scroll-to-form {
+            margin-top: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 }
