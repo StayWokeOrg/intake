@@ -1,5 +1,5 @@
 /* env browser */
-/* global $, Handlebars */
+/* global $, Handlebars, document */
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
 /* eslint-disable no-unused-vars */
@@ -50,5 +50,15 @@ var inauguration = {
   id: 'ready',
   name: '(Anti) Inauguration',
   number: NUMBER,
-  description: 'Or, fill out the form below to stay connected with the movement. Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
+  description: 'Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
 }
+
+// smooth scrolling when clicking scroll links
+$(document).ready(() => {
+  $('.scroll-button').click(function onClickScrollButton(event) {
+    event.preventDefault()
+    $('html, body').animate({
+      scrollTop: $(this.hash).offset().top
+    }, 500)
+  })
+})
