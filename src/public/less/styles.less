@@ -26,7 +26,7 @@ Selected Bootstrap Imports
 @import "@{BOOTSTRAP}/labels.less";
 // @import "@{BOOTSTRAP}/component-animations.less";
 // @import "@{BOOTSTRAP}/dropdowns.less";
-// @import "@{BOOTSTRAP}/navs.less";
+@import "@{BOOTSTRAP}/navs.less";
 // @import "@{BOOTSTRAP}/navbar.less";
 // @import "@{BOOTSTRAP}/list-group.less";
 // @import "@{BOOTSTRAP}/panels.less";
@@ -49,6 +49,14 @@ Selected Bootstrap Imports
 
 @font--body:		'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
 @btn-primary-bg: #db2b39;
+
+@component-active-bg:               @color--secondary;
+@nav-tabs-active-link-hover-color:  @color--text;
+@nav-link-hover-bg:                 @color--link;
+
+.nav-pills a:hover{
+  color:@color--primary;
+}
 
 /* ------------------------
 	Generic Styles
