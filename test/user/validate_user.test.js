@@ -46,7 +46,7 @@ describe('validate_user:', () => {
       {
         description: 'user without zip',
         value: makeUserWithout('zip'),
-        expected: 'user must have a zip code',
+        expected: undefined,
       },
       {
         description: 'user without email and phone',

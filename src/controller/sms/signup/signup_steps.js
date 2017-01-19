@@ -125,8 +125,9 @@ const steps = {
       source: 'sms',
     })
     .then((data) => {
-      res.send(message('Cool, thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾'))
       markComplete(req, 'goodbye')
+      delete req.session.flowName
+      res.send(message('Cool, thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾'))
     }, (reason) => {
       res.send(message('Hmm, there was an error saving your info.'))
       debug('error', reason)

@@ -1,7 +1,5 @@
 /* eslint-disable no-param-reassign */
-const flows = require('./flows')
-const getFlowName = require('./get_flow_name')
-const message = require('./message')
+const commands = require('./commands')
 const debug = require('debug')('sms') // eslint-disable-line
 
 /**
@@ -19,31 +17,12 @@ module.exports = function dispatcher(req, res) {
   // ensure the steps object exists
   req.session.steps = req.session.steps || {}
 
-  debug('----------------------------')
-  debug('req.body.Body', req.body.Body)
-  debug('req.session', req.session)
+  // parse their input keyword (which might be a flow response)
+  const keyword = req.body.Body.trim().toLowerCase()
 
-  // debugging keywords
-  if (req.body.Body === 'flow') {
-    res.send(message(req.session.flowName))
-  }
-  if (req.body.Body === 'session') {
-    res.send(message(JSON.stringify(req.session)))
-  }
-  if (req.body.Body === 'steps') {
-    res.send(message(JSON.stringify(req.session.steps)))
-  }
-  if (req.body.Body === 'user') {
-    res.send(message(JSON.stringify(req.session.user)))
-  }
-  if (req.body.Body === 'clear') {
-    delete req.session
-    res.send(message('Session cleared.'))
-  }
+  // look up the associated command, or call the unknown command
+  // commands.unknown will see if they're in a flow and delegate to it
+  const command = commands[keyword] || commands.unknown
 
-  const flowName = getFlowName(req, res)
-  debug('flowName', flowName)
-
-  const flow = flows[flowName]
-  flow.dispatcher(req, res)
+  command(req, res)
 }
