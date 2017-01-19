@@ -51,6 +51,7 @@ var inauguration = {
   name: '(Anti) Inauguration',
   number: NUMBER,
   description: 'Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
+  url: '/inauguration.html',
 }
 
 // smooth scrolling when clicking scroll links
