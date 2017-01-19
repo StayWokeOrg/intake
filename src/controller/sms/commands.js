@@ -3,6 +3,9 @@ const message = require('./message')
 const flows = require('./flows')
 const debug = require('debug')('sms') // eslint-disable-line
 
+// note: please use ‘real’ apostrophes instead of \'
+// on a mac: option-] and option-shift-]
+
 const commands = {
   // debugging keywords
   'flow': (req, res) => {
@@ -22,8 +25,14 @@ const commands = {
     res.send(message('Session cleared.'))
   },
 
+  'schedule': (req, res) => {
+    res.send(message('Here’s a schedule!'))
+  },
+
   'signup': (req, res) => {
+    // set the flow name in the session
     req.session.flowName = 'signup'
+    // delegate to the flow
     flows.signup.dispatcher(req, res)
   },
 
@@ -38,7 +47,8 @@ const commands = {
     }
 
     // no flow, or flow was invalid
-    const text = 'Sorry, didn’t quite get that. You can say ‘ready’ to join StayWoke, or ‘schedule’ for a list of upcoming events.'
+    // tell them what commands they can send us
+    const text = 'Sorry, didn’t quite get that. You can say ‘signup’ to join StayWoke, or ‘schedule’ for a list of upcoming events.'
     res.send(message(text))
   },
 }
