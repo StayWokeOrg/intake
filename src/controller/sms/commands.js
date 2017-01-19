@@ -7,23 +7,6 @@ const debug = require('debug')('sms') // eslint-disable-line
 // on a mac: option-] and option-shift-]
 
 const commands = {
-  // debugging keywords
-  'flow': (req, res) => {
-    res.send(message(req.session.flowName))
-  },
-  'session': (req, res) => {
-    res.send(message(JSON.stringify(req.session)))
-  },
-  'steps': (req, res) => {
-    res.send(message(JSON.stringify(req.session.steps)))
-  },
-  'user': (req, res) => {
-    res.send(message(JSON.stringify(req.session.user)))
-  },
-  'clear': (req, res) => {
-    delete req.session
-    res.send(message('Session cleared.'))
-  },
 
   'schedule': (req, res) => {
     res.send(message('Here’s a schedule!'))
@@ -55,5 +38,27 @@ const commands = {
 
 // aliases
 commands.ready = commands.signup
+
+if (process.env.NODE_ENV !== 'production') {
+  Object.assign(commands, {
+    // debugging keywords
+    'flow': (req, res) => {
+      res.send(message(req.session.flowName))
+    },
+    'session': (req, res) => {
+      res.send(message(JSON.stringify(req.session)))
+    },
+    'steps': (req, res) => {
+      res.send(message(JSON.stringify(req.session.steps)))
+    },
+    'user': (req, res) => {
+      res.send(message(JSON.stringify(req.session.user)))
+    },
+    'clear': (req, res) => {
+      delete req.session
+      res.send(message('Session cleared.'))
+    },
+  })
+}
 
 module.exports = commands
