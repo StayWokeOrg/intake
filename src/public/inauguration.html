@@ -30,16 +30,18 @@
         </header>
         <section class="shadowed">
           <h1 class="text-center">Pledge to RESIST.</h1>
-          <div class="campaign-text-info"></div>
+          <div class="campaign-text-info">
+          </div>
           <div class="container">
             <ul class="nav nav-pills nav-justified" role="tablist">
-                  <li id="tab_planning" role="presentation" class="active">
-                    <a role="tab" data-toggle="tab" href="#planning" class="nav-pill balance-text">Planning for DC</a></li>
-                  <li id="tab_atProtest" role="presentation" >
-                    <a role="tab" data-toggle="tab" href="#atProtest" class="nav-pill balance-text">During the Protest</a></li>
-                  <li id="tab_fromHome" role="presentation" >
-                    <a role="tab" data-toggle="tab" href="#fromHome" class="nav-pill balance-text">Take Action from Home</a></li>
-                </ul>
+              <li id="tab_planning" role="presentation" class="active">
+                <a role="tab" data-toggle="tab" href="#planning" class="nav-pill balance-text">Planning for DC</a></li>
+              <li id="tab_atProtest" role="presentation" >
+                <a role="tab" data-toggle="tab" href="#atProtest" class="nav-pill balance-text">During the Protest</a></li>
+              <li id="tab_fromHome" role="presentation" >
+                <a role="tab" data-toggle="tab" href="#fromHome" class="nav-pill balance-text">Take Action from Home</a>
+              </li>
+            </ul>
           </div>
         </section>
         <section class="tab-content">
@@ -48,7 +50,7 @@
               <div class="col-md-3">
                 <div class="panel panel-primary">
                   <div class="panel-heading panel-link">
-                      <a class="btn center-block balance-text" href="https://www.eff.org/deeplinks/2016/11/digital-security-tips-for-protesters">Security tips for protesters</a>
+                    <a class="btn center-block balance-text" href="https://www.eff.org/deeplinks/2016/11/digital-security-tips-for-protesters">Security tips for protesters</a>
                   </div>
                   <div class="panel-body">
                     <small>10 security tips for protesting in the digital age.</small>
@@ -89,6 +91,11 @@
           </div>
           <div class="tab-pane container" id="atProtest" role="tabpanel">
             <div class="row">
+              <div class="col-sm-3">
+                <a href="http://www.accuweather.com/en/us/washington-dc/20006/weather-forecast/327659" class="aw-widget-legal">
+                </a>
+                <div id="awcc1484844821823" class="aw-widget-current"  data-locationkey="18-327659_1_AL" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1484844821823"></div>
+              </div>
               <div class="col-md-3">
                 <div class="panel panel-primary">
                   <div class="panel-heading panel-link">
@@ -151,6 +158,7 @@
     <script src="./bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
+    <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 
     <script>
       // set the campaign once
@@ -161,6 +169,17 @@
         data: campaign
       })
       textView.renderTo('.campaign-text-info')
+
+      // url hash for direct links to subtabs on inauguration.html
+      $(document).ready(() => {
+        if (location.hash) {
+          $("a[href='" + location.hash + "']").tab('show')
+        }
+        $('.nav').on('click', 'a[data-toggle]', function onClickGethref(event) {
+          location.hash = this.getAttribute('href')
+        })
+      })
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
   </body>

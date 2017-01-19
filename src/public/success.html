@@ -11,6 +11,9 @@
     <script id="success-info-template" type="text/x-handlebars-template">
       <h2 class="text-center balance-text">You are now a member of the {{name}} campaign!</h1>
       <p class="text-center balance-text">Thanks for getting involved! We’ll let you know when there are actions happening in your area.</p>
+      {{#if url}}
+      <h4 class="text-center balance-text"><a href="{{url}}">Visit the {{name}} page</a></h4>
+      {{/if}}
     </script>
     <link rel="stylesheet" href="./build/styles.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
