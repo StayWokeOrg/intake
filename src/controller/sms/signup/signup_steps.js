@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 const message = require('../message')
 const saveUser = require('../../../user/save_user')
+const issues = require('../../../public/issues').issues
 const debug = require('debug')('sms')
 
 function notStarted(req, step) {
@@ -112,16 +113,46 @@ const steps = {
     }
   },
 
-  // WIP
   'issues': (req, res, next) => {
     if (notStarted(req, 'issues')) {
       markStarted(req, 'issues')
-      res.send(message('Great'))
+
+      // construct the issues message
+      const greeting = 'Thanks! Are there particular issues that interest you?\n'
+
+      const menu = (
+        issues
+        .map((issue, i) => `${i + 1}. ${issue.description}\n`)
+        .join('')
+      )
+
+      const prompt = 'Enter as many numbers as you like:'
+
+      const msg = `${greeting}\n${menu}\n${prompt}`
+
+      res.send(message(msg))
     } else {
-      // trim the name and collapse multiple spaces
-      req.session.user.name = req.body.Body.trim().replace(/ +/g, ' ')
-      // store their phone as well
-      req.session.user.phone = req.body.From
+      // convert the response into an array of valid numbers
+      const numbers = (
+        req.body.Body
+        .split('')
+        // convert each to a number
+        .map(n => Number(n))
+        // filter out non-numbers
+        .filter(n => !isNaN(n))
+        // subtract 1 from each for 0-based indexes
+        .map(n => n - 1)
+        // filter out numbers that are out of range
+        .filter(n => n >= 0)
+        .filter(n => n < issues.length)
+      )
+
+      // map the numbers to issue ids
+      const topics = numbers.map(n => issues[n].id)
+
+      // update user.topics in the session
+      req.session.user.topics = topics
+
       // mark this step as complete
       markComplete(req, 'issues')
       next()
@@ -129,12 +160,9 @@ const steps = {
   },
 
   'goodbye': (req, res, next) => {
-    const user = {
-      name: req.session.user.name,
-      phone: req.session.user.phone,
-      zip: req.session.user.zip,
-      campaign: 'inauguration',
-    }
+    const user = req.session.user
+    user.campaign = 'inauguration'
+    debug('saving user', user)
 
     saveUser({
       user,

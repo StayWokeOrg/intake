@@ -41,7 +41,12 @@ CampaignView.prototype = {
   // insert rendered html into a dom node
   renderTo: function renderTo(selector) {
     $(selector).html(this.toHtml())
-  }
+  },
+
+  // append rendered html into a dom node
+  appendTo: function appendTo(selector) {
+    $(selector).append(this.toHtml())
+  },
 
 }
 

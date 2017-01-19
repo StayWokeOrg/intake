@@ -1,5 +1,7 @@
 /* eslint-disable */
-// WIP
+
+// this file is shared with client and server
+// hence, the UMD wrapper
 (function (root, factory) {
     'use strict';
 
@@ -15,14 +17,23 @@
     }
 }(this, function (exports) {
 
-  exports.issues = {
-    'cabinet_nominations': {
+  exports.issues = [
+    {
+      id: 'cabinet_nominations',
       description: 'Senate confirmations of cabinet members',
     },
-    'aca': {
-      description: 'Senate confirmations of cabinet members',
+    {
+      id: 'aca',
+      description: 'The Affordable Care Act (Obamacare)',
     },
-  }
-
+    {
+      id: 'policing',
+      description: 'Policing',
+    },
+    {
+      id: 'immigration',
+      description: 'Immigration',
+    },
+  ]
 
 }));
