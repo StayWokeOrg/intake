@@ -51,6 +51,7 @@ var inauguration = {
   name: '(Anti) Inauguration',
   number: NUMBER,
   description: 'Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
+  url: '/inauguration.html',
 }
 
 // smooth scrolling when clicking scroll links
@@ -60,5 +61,15 @@ $(document).ready(() => {
     $('html, body').animate({
       scrollTop: $(this.hash).offset().top
     }, 500)
+  })
+})
+
+// url hash for direct links to subtabs on inauguration.html
+$(document).ready(() => {
+  if (location.hash) {
+    $("a[href='" + location.hash + "']").tab('show')
+  }
+  $('.nav').on('click', 'a[data-toggle]', function onClickGethref(event) {
+    location.hash = this.getAttribute('href')
   })
 })
