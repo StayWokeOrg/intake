@@ -3,7 +3,7 @@
 When an SMS is received, we have to determine the user’s intent. This is accomplished using Commands and Flows.
 
 ### Commands
-Commands live in an object at `src/controller/sms/commands.js`. Each command is a simple function that corresponds to some word the user sends us.
+Commands live in an object at `src/controller/sms/commands.js`. Each command is a function that corresponds to some word the user sends us.
 
 Some commands simply return a text response. For example, 'schedule' returns a text schedule.
 
