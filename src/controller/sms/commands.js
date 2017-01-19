@@ -21,10 +21,12 @@ const commands = {
     delete req.session
     res.send(message('Session cleared.'))
   },
-  'ready': (req, res) => {
+
+  'signup': (req, res) => {
     req.session.flowName = 'signup'
     flows.signup.dispatcher(req, res)
   },
+
   'unknown': (req, res) => {
     if (req.session.flowName) {
       // user is in a flow, see if it exists and delegate to it
@@ -40,5 +42,8 @@ const commands = {
     res.send(message(text))
   },
 }
+
+// aliases
+commands.ready = commands.signup
 
 module.exports = commands
