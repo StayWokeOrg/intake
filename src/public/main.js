@@ -63,13 +63,3 @@ $(document).ready(() => {
     }, 500)
   })
 })
-
-// url hash for direct links to subtabs on inauguration.html
-$(document).ready(() => {
-  if (location.hash) {
-    $("a[href='" + location.hash + "']").tab('show')
-  }
-  $('.nav').on('click', 'a[data-toggle]', function onClickGethref(event) {
-    location.hash = this.getAttribute('href')
-  })
-})
