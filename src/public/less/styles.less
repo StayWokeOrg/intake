@@ -26,10 +26,10 @@ Selected Bootstrap Imports
 @import "@{BOOTSTRAP}/labels.less";
 // @import "@{BOOTSTRAP}/component-animations.less";
 // @import "@{BOOTSTRAP}/dropdowns.less";
-// @import "@{BOOTSTRAP}/navs.less";
+@import "@{BOOTSTRAP}/navs.less";
 // @import "@{BOOTSTRAP}/navbar.less";
 // @import "@{BOOTSTRAP}/list-group.less";
-// @import "@{BOOTSTRAP}/panels.less";
+@import "@{BOOTSTRAP}/panels.less";
 // @import "@{BOOTSTRAP}/close.less";
 
 // Utility classes
@@ -50,20 +50,29 @@ Selected Bootstrap Imports
 @font--body:		'Source Sans Pro', Helvetica, Arial, Verdana, sans-serif;
 @btn-primary-bg: #db2b39;
 
+@component-active-bg:               @color--secondary;
+@nav-tabs-active-link-hover-color:  @color--text;
+@nav-link-hover-bg:                 @color--link;
+
+.nav-pills a:hover{
+  color:@color--primary;
+}
+
+
 /* ------------------------
 	Generic Styles
 --------------------------*/
 
 html {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 body {
-    background-color: #222;
-    color: @color--text;
-    font-family: @font--body;
-    font-size: 1.125em;
-	line-height: 1.5;
+  background-color: #222;
+  color: @color--text;
+  font-family: @font--body;
+  font-size: 1.125em;
+  line-height: 1.5;
 }
 
 header, section, footer {
@@ -97,15 +106,15 @@ blockquote {
 	font-size: 24px;
 	font-weight: 700;
 	font-style: italic;
-    text-align: center;
-    border-left: none;
+  text-align: center;
+  border-left: none;
 
-	small {
-		color: #ccc;
-		font-weight: 400;
-        text-align: right;
-        margin-top: 1rem;
-	}
+  small {
+  		color: #ccc;
+  		font-weight: 400;
+      text-align: right;
+      margin-top: 1rem;
+  	}
 }
 
 a {
@@ -150,7 +159,10 @@ section.shadowed {
     background-color: #333;
     box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.2);
 }
-
+.btn{
+  white-space:normal !important;
+  word-wrap:break-word;
+}
 /* ------------------------
 	Header
 --------------------------*/
@@ -168,6 +180,10 @@ header {
     margin-top: 1rem;
 }
 
+.nav-pill{
+  width: 80%;
+  margin: auto;
+}
 /* ------------------------
 	Section: Form
 --------------------------*/
@@ -191,11 +207,27 @@ header {
     width: 100%;
 }
 
+/* ------------------------
+	Panels
+--------------------------*/
+
+@panel-bg:                    #333;
+@panel-primary-text:          @color--primary;
+@panel-primary-border:        @color--primary;
+@panel-primary-heading-bg:    #fff;
+
+.panel-heading a{
+  color:@color--primary ;
+  font-size: 20px;
+}
+
+.panel-link:hover{
+  background-color: @color--secondary;
+}
 
 /* ------------------------
 	Success Page
 --------------------------*/
-
 
 .thank-you-header {
     background-color: @color--secondary;
