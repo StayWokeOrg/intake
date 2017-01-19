@@ -13,7 +13,7 @@ Some commands simply return a text response. For example, 'schedule' returns a t
 },
 ```
 
-Other commands can trigger a ‘flow’. For example, ‘signup’ starts the signup flow.
+Other commands can trigger a 'flow'. For example, 'signup' starts the signup flow.
 
 ```js
 'signup': (req, res) => {
@@ -46,7 +46,7 @@ If a user response doesn’t correspond to a command, they might be responding t
 
 ### Aliases
 
-We can create aliases for commands by duping them with a new key name. For example, ‘ready’ is
+We can create aliases for commands by duping them with a new key name. For example, 'ready' is an alias for 'signup'.
 
 ```js
 // aliases
