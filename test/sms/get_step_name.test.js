@@ -1,44 +1,63 @@
-const chai = require('chai')
+/* eslint-disable func-names */
 
+const chai = require('chai')
 const expect = chai.expect // eslint-disable-line
 const should = chai.should() // eslint-disable-line
 
 const getStepName = require('../../src/controller/sms/get_step_name')
 
-describe('controller/sms/get_step_name:', () => {
-  describe('#getStepName(user)', () => {
+describe('controller/sms/get_step_name:', function() {
+  describe('#getStepName(session, steps)', function() {
     const method = getStepName
-    describe('if user is empty', () => {
-      it('should return "keyword"', () => {
-        const user = {}
-        method(user).should.equal('keyword')
+    const steps = {
+      step_one: 'step_one',
+      step_two: 'step_two',
+      step_three: 'step_three',
+    }
+    function makeSession() {
+      return {
+        steps: {},
+      }
+    }
+    beforeEach(function() {
+      this.session = makeSession()
+    })
+    describe('if session is empty', function() {
+      it('should return "step_one"', function() {
+        method(this.session, steps).should.equal('step_one')
       })
     })
-    describe('if user.keyword exists', () => {
-      it('should return "name"', () => {
-        const user = {
-          keyword: 'keyword',
-        }
-        method(user).should.equal('name')
+    describe('if step_one is started, but not complete', function() {
+      beforeEach(function() {
+        this.session.steps.step_one = 'started'
+      })
+      it('should return "step_one"', function() {
+        method(this.session, steps).should.equal('step_one')
       })
     })
-    describe('if user.name exists', () => {
-      it('should return "zip"', () => {
-        const user = {
-          keyword: 'keyword',
-          name: 'First Last',
-        }
-        method(user).should.equal('zip')
+    describe('if step_one is complete', function() {
+      beforeEach(function() {
+        this.session.steps.step_one = 'complete'
       })
-    })
-    describe('if user.zip exists', () => {
-      it('should return "goodbye"', () => {
-        const user = {
-          keyword: 'keyword',
-          name: 'First Last',
-          zip: '12345',
-        }
-        method(user).should.equal('goodbye')
+      it('should return "step_two"', function() {
+        method(this.session, steps).should.equal('step_two')
+      })
+
+      describe('if step_two is started, but not complete', function() {
+        beforeEach(function() {
+          this.session.steps.step_two = 'started'
+        })
+        it('should return "step_two"', function() {
+          method(this.session, steps).should.equal('step_two')
+        })
+      })
+      describe('if step_two is complete', function() {
+        beforeEach(function() {
+          this.session.steps.step_two = 'complete'
+        })
+        it('should return "step_three"', function() {
+          method(this.session, steps).should.equal('step_three')
+        })
       })
     })
   })

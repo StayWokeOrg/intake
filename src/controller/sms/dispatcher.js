@@ -1,20 +1,14 @@
 /* eslint-disable no-param-reassign */
-const steps = require('./steps')
-const getStepName = require('./get_step_name')
-const getNextStepName = require('./get_next_step_name')
-const debug = require('debug')('sms')
+const flows = require('./flows')
+const getFlowName = require('./get_flow_name')
+const message = require('./message')
+const debug = require('debug')('sms') // eslint-disable-line
 
 /**
  * dispatcher - primary SMS handler
  *
-
- when a request comes in, the dispatcher inspects the session to see which steps
- have been satisfied already to determine the current step and the next step. it
- then calls the after handler of the current step, and the before handler of the
- next step. the after handler for a step reads the user's response and stores it
- in the session. the before handler for a step asks the user for the next piece
- of data.
-
+ * determines which flow the user wants or is using, and calls its dispatcher
+ *
  * @param  {type} req express request object
  * @param  {type} res express response object
  */
@@ -22,21 +16,34 @@ module.exports = function dispatcher(req, res) {
   // ensure the user object exists in the session
   req.session.user = req.session.user || {}
 
-  const stepName = getStepName(req.session.user)
-  debug('step', stepName)
+  // ensure the steps object exists
+  req.session.steps = req.session.steps || {}
 
-  const nextStepName = getNextStepName(req.session.user)
-  debug('next step', nextStepName)
+  debug('----------------------------')
+  debug('req.body.Body', req.body.Body)
+  debug('req.session', req.session)
 
-  // if the step exists and has an after handler, call it
-  const step = steps[stepName]
-  if (step && step.after) {
-    step.after(req, res)
+  // debugging keywords
+  if (req.body.Body === 'flow') {
+    res.send(message(req.session.flowName))
+  }
+  if (req.body.Body === 'session') {
+    res.send(message(JSON.stringify(req.session)))
+  }
+  if (req.body.Body === 'steps') {
+    res.send(message(JSON.stringify(req.session.steps)))
+  }
+  if (req.body.Body === 'user') {
+    res.send(message(JSON.stringify(req.session.user)))
+  }
+  if (req.body.Body === 'clear') {
+    delete req.session
+    res.send(message('Session cleared.'))
   }
 
-  // if the next step exists and has a before handler, call it
-  const nextStep = steps[nextStepName]
-  if (nextStep && nextStep.before) {
-    nextStep.before(req, res)
-  }
+  const flowName = getFlowName(req, res)
+  debug('flowName', flowName)
+
+  const flow = flows[flowName]
+  flow.dispatcher(req, res)
 }
