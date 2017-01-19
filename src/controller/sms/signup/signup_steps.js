@@ -112,6 +112,22 @@ const steps = {
     }
   },
 
+  // WIP
+  'issues': (req, res, next) => {
+    if (notStarted(req, 'issues')) {
+      markStarted(req, 'issues')
+      res.send(message('Great'))
+    } else {
+      // trim the name and collapse multiple spaces
+      req.session.user.name = req.body.Body.trim().replace(/ +/g, ' ')
+      // store their phone as well
+      req.session.user.phone = req.body.From
+      // mark this step as complete
+      markComplete(req, 'issues')
+      next()
+    }
+  },
+
   'goodbye': (req, res, next) => {
     const user = {
       name: req.session.user.name,
