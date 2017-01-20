@@ -46,6 +46,7 @@
             </ul>
           </div>
         </section>
+
         <section class="tab-content">
           <div class="tab-pane container active" id="planning" role="tabpanel">
             <div class="row">
@@ -150,9 +151,24 @@
           </div>
         </section>
       </div>
+      <section class="scroll-to-form text-center">
+          <p>
+            <a href="#membermap" class="scroll-button btn btn-primary btn-lg">
+              <span class="glyphicon glyphicon-chevron-down"></span>
+              <span>Member's Map</span>
+            </a>
+          </p>
+      </section>
       <div class="page map">
-        <h4>Where our members are from</h4>
-        <div id="map"></div>
+        <a name="membermap" id="membermap"></a>
+        <div class="panel panel-primary">
+          <div class="panel-heading ">
+            <h4 class="text-center balance-text">Where our members are from</h4>
+          </div>
+          <div class="panel-body">
+            <div id="map"></div>
+          </div>
+        </div>
       </div>
       <footer>
         <p>
@@ -189,7 +205,6 @@
         })
       })
     </script>
-
     <script src="./mapUsers.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_1gaWM06y2_P1kbH4jTMi3zy6vJUYp1E&callback=initMap&libraries=visualization"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>

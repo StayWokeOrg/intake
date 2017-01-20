@@ -1,3 +1,4 @@
+
 (function closure(firebase) {
   var map
   var google
@@ -56,6 +57,15 @@
   }
 
   firebase.initializeApp(config)
+  var animateCircle = function animateCircle(circle) {
+    var rMin = 70000
+    setInterval(function setInterval() {
+      var radius = circle.getRadius()
+      if (radius > rMin) {
+        circle.setRadius(radius - 500)
+      }
+    }, 3)
+  }
 
   firebase.database().ref('/publicInfo/' + window.campaign.id).on('child_added', function getSnapShot(snapshot) {
     var ele = snapshot.val()
@@ -70,8 +80,8 @@
       fillOpacity: 0.35,
       map: map,
       center: latLng,
-      radius: 70000,
-      animation: google.maps.Animation.DROP,
+      radius: 150000,
     })
+    animateCircle(marker)
   })
 }(window.firebase))
