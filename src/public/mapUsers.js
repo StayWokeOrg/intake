@@ -57,14 +57,14 @@
   }
 
   firebase.initializeApp(config)
-  var animateCircle = function (circle) {
-    var rMin = 70000;
-    setInterval(function() {
-        var radius = circle.getRadius();
-        if (radius > rMin) {
-          circle.setRadius(radius - 500);
-        }
-    }, 3);
+  var animateCircle = function animateCircle(circle) {
+    var rMin = 70000
+    setInterval(function setInterval() {
+      var radius = circle.getRadius()
+      if (radius > rMin) {
+        circle.setRadius(radius - 500)
+      }
+    }, 3)
   }
 
   firebase.database().ref('/publicInfo/' + window.campaign.id).on('child_added', function getSnapShot(snapshot) {
@@ -82,6 +82,6 @@
       center: latLng,
       radius: 150000,
     })
-    animateCircle(marker);
+    animateCircle(marker)
   })
 }(window.firebase))
