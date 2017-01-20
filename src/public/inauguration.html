@@ -92,9 +92,11 @@
           <div class="tab-pane container" id="atProtest" role="tabpanel">
             <div class="row">
               <div class="col-sm-3">
-                <a href="http://www.accuweather.com/en/us/washington-dc/20006/weather-forecast/327659" class="aw-widget-legal">
-                </a>
-                <div id="awcc1484844821823" class="aw-widget-current"  data-locationkey="18-327659_1_AL" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1484844821823"></div>
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=38.8901&lon=-77.027&name=National Mall"> </iframe>
+                  </div>
+                </div>
               </div>
               <div class="col-md-3">
                 <div class="panel panel-primary">
@@ -158,8 +160,6 @@
     <script src="./bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
-    <script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script>
-
     <script>
       // set the campaign once
       var campaign = inauguration
