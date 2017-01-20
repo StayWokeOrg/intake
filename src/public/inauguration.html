@@ -204,62 +204,6 @@
         })
       })
     </script>
-
-<<<<<<< HEAD
-    <script>
-    var map
-      function initMap() {
-        var styleArray = [
-          {
-            featureType: 'all',
-            stylers: [
-              { saturation: -80 }
-            ]
-          },{
-            featureType: 'road.arterial',
-            elementType: 'geometry',
-            stylers: [
-              { hue: '#00ffee' },
-              { saturation: 50 }
-            ]
-          },{
-            featureType: 'poi.business',
-            elementType: 'labels',
-            stylers: [
-              { visibility: 'off' }
-            ]
-          }
-        ];
-        var options = $.extend({
-          zoom:4,
-          scrollwheel: false,
-          navigationControl: false,
-          mapTypeControl: false,
-          styles: styleArray,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-          }, options);
-        map = new google.maps.Map(document.getElementById('map'), options);
-        var bounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(40, -124.39),
-        new google.maps.LatLng(49.38, -66.94)
-      );
-
-        map.fitBounds(bounds);
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address': 'US'}, function (results, status) {
-          map.setCenter(results[0].geometry.location);
-          google.maps.event.addDomListener(window, 'resize', function() {
-            google.maps.event.trigger(map, "resize");
-            map.setCenter(results[0].geometry.location);
-            map.fitBounds(bounds);
-
-
-          });
-      });
-    }
-    </script>
-=======
->>>>>>> 531dc2068e3b1547cdcf47babfaabed586f6ccb6
     <script src="./mapUsers.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_1gaWM06y2_P1kbH4jTMi3zy6vJUYp1E&callback=initMap&libraries=visualization"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
