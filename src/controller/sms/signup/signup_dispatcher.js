@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 const steps = require('./signup_steps.js')
 const getStepName = require('../get_step_name')
-// const getNextStepName = require('../get_next_step_name')
 const debug = require('debug')('sms')
 
 /**
