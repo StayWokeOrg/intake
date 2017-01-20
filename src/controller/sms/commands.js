@@ -54,7 +54,8 @@ if (process.env.NODE_ENV !== 'production') {
   Object.assign(commands, {
     // debugging keywords
     'flow': (req, res) => {
-      res.send(message(req.session.flowName))
+      const msg = req.session.flowName || 'undefined'
+      res.send(message(msg))
     },
     'session': (req, res) => {
       res.send(message(JSON.stringify(req.session)))
