@@ -3,17 +3,18 @@ const validateUser = require('./validate_user')
 const validateCampaign = require('./validate_campaign')
 const encodeUser = require('./encode_user')
 const debug = require('debug')('user') // eslint-disable-line
-var firebase = require("firebase")
+const firebase = require('firebase')
 
 // Initialize Firebase
- var config = {
-   apiKey: "AIzaSyBw6HZ7Y4J1dATyC4-_mKmt3u0hLRRqthQ",
-   authDomain: "staywokesignups.firebaseapp.com",
-   databaseURL: "https://staywokesignups.firebaseio.com",
-   storageBucket: "staywokesignups.appspot.com",
-   messagingSenderId: "47559178634"
- };
- firebase.initializeApp(config);
+var config = {
+  apiKey: 'AIzaSyBw6HZ7Y4J1dATyC4-_mKmt3u0hLRRqthQ',
+  authDomain: 'staywokesignups.firebaseapp.com',
+  databaseURL: 'https://staywokesignups.firebaseio.com',
+  storageBucket: 'staywokesignups.appspot.com',
+  messagingSenderId: '47559178634',
+}
+
+firebase.initializeApp(config);
 
 var firebasedb = firebase.database()
 
@@ -70,14 +71,13 @@ module.exports = function saveUser({ user, source }) {
       campaign,
       source,
     })
-    console.log(userData);
     // make request
     makeCentralRequest(userData)
     .then(resolve, reject)
     //post to firebase
     var firstname = userData.name.split(' ')[0]
     var newUser = firebasedb.ref('publicInfo/' + userData.campaign).push()
-    return firebasedb.ref('/publicInfo/zips/' + user.zip.toString()).once('value').then(function(snapshot) {
+    return firebasedb.ref('/publicInfo/zips/' + user.zip.toString()).once('value').then(function (snapshot) {
       console.log('sending to firebase:', firstname);
       newUser.set({
         name: firstname,
@@ -86,7 +86,6 @@ module.exports = function saveUser({ user, source }) {
         long: snapshot.val().LNG,
       })
   // ...
-});
-
+    })
   })
 }
