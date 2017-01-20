@@ -5,9 +5,9 @@ const debug = require('debug')('sms') // eslint-disable-line
 /**
  * dispatcher - primary SMS handler
  *
- * ensures necessary session fixtures
- * parses user input
- * delegates to appropriate command based on user input
+ * - ensures necessary session fixtures
+ * - parses user input
+ * - delegates to appropriate command based on user input
  *
  * @param  {type} req express request object
  * @param  {type} res express response object
