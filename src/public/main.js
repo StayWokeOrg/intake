@@ -40,6 +40,8 @@
 
   }
 
+  window.CampaignView = CampaignView
+
   // campaign data object, used on both pages
   window.inauguration = {
     id: 'inauguration',
