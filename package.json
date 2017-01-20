@@ -34,6 +34,7 @@
     "express-session": "^1.14.2",
     "express-sslify": "1.2.0",
     "express-validator": "^2.20.4",
+    "firebase": "^3.6.6",
     "helmet": "^3.3.0",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
