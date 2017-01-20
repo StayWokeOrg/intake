@@ -1,5 +1,5 @@
 const validCampaigns = [
-  'ready',
+  'inauguration',
 ]
 
 module.exports = validCampaigns

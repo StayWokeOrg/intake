@@ -26,6 +26,15 @@ testConfig.rules = Object.assign({}, baseConfig.rules, {
   'no-unused-expressions': [
     OFF
   ],
+  'func-names': [
+    OFF
+  ],
+  'prefer-arrow-callback': [
+    OFF
+  ],
+  'space-before-function-paren': [
+    OFF
+  ],
   'import/newline-after-import': [
     OFF
   ],

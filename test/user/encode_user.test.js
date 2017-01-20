@@ -5,7 +5,7 @@ const debug = require('debug')('test') // eslint-disable-line
 
 const encodeUser = require('../../src/user/encode_user')
 
-describe('encode_user:', () => {
+describe('user/encode_user:', () => {
   describe('#encodeUser()', () => {
     function makeUser() {
       const user = {
