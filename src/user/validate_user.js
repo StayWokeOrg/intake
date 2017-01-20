@@ -12,7 +12,6 @@ module.exports = function validateUser(user) {
   if (!user) return 'user must exist'
 
   if (!user.name) return 'user must have a name'
-  if (!user.zip) return 'user must have a zip code'
   if (!user.email && !user.phone) return 'user must have an email or a phone'
 
   return undefined

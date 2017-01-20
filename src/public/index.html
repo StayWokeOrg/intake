@@ -9,13 +9,20 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
     <script id="campaign-text-info-template" type="text/x-handlebars-template">
-      <h3 class="text-center balance-text">Text “{{id}}” to <span class="text-nowrap">{{number}}</span> <span class="text-nowrap">or join below.</span></h3>
+      <h3 class="text-center balance-text">Text “{{sms_keyword}}” to <span class="text-nowrap">{{number}}</span> <span class="text-nowrap">or join below.</span></h3>
     </script>
     <script id="campaign-description-template" type="text/x-handlebars-template">
       <p>{{description}}</p>
     </script>
     <script id="campaign-name-template" type="text/x-handlebars-template">
       <h3 class="balance-text">The {{name}} Campaign</h3>
+    </script>
+    <script id="checkbox-template" type="text/x-handlebars-template">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name={{name}} value={{value}}> {{ label }}
+        </label>
+      </div>
     </script>
     <link rel="stylesheet" href="./build/styles.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
@@ -55,6 +62,7 @@
         <section class="intake">
           <div class="campaign-name"></div>
           <form action="submit" method="post">
+            <input type="hidden" name="campaign" id="campaign">
             <div class="form-group">
               <label for="name">Name</label>
               <input class="form-control input-lg" type="text" name="name" id="name" required>
@@ -71,10 +79,13 @@
             </div>
             <div class="form-group">
               <label for="zip">Zip code</label>
-              <input class="form-control input-lg" type="number" name="zip" id="zip" required pattern="[0-9]{5}" title="Five-digit U.S. zip code">
+              <input class="form-control input-lg" type="text" name="zip" id="zip" required pattern="[0-9]{5}" title="Five-digit U.S. zip code">
               <span class="label label-danger hidden">Please include your 5-digit zip code</span>
             </div>
-            <input type="hidden" name="campaign" id="campaign">
+            <div class="form-group">
+              <label>Are there particular issues that interest you?</label>
+              <div class="issue-checkboxes"></div>
+            </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-lg">
                 <span>Get Involved</span>
@@ -116,7 +127,8 @@
       <footer>
         <p>
           <a href="http://staywoke.org/">#StayWoke</a> |
-          <a href="https://www.joincampaignzero.org/">CampaignZero</a>
+          <a href="https://www.joincampaignzero.org/">CampaignZero</a> |
+          <a href="privacy-policy.html">Privacy Policy</a>
         </p>
       </footer>
     </div>
@@ -124,9 +136,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
+    <script src="./issues.js"></script>
     <script>
       // set the campaign once
       var campaign = inauguration
+
+      // set the campaign in the form input
+      $('input#campaign').val(campaign.id)
 
       var textView = new CampaignView({
         templateId: '#campaign-text-info-template',
@@ -146,8 +162,18 @@
       })
       nameView.renderTo('.campaign-name')
 
-      // set the campaign in the form input
-      $('input#campaign').val(campaign.id)
+      issues.forEach(function(issue) {
+        var issueView = new CampaignView({
+          templateId: '#checkbox-template',
+          data: {
+            name: 'topics',
+            value: issue.id,
+            label: issue.description,
+          },
+        })
+        issueView.appendTo('.issue-checkboxes')
+      })
+
     </script>
     <script src="./form-validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
