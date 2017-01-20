@@ -34,6 +34,10 @@
       id: 'immigration',
       description: 'Immigration',
     },
+    {
+      id: 'organizing',
+      description: 'Organizing in your area',
+    },
   ]
 
 }));
