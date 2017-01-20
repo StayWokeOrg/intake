@@ -1,4 +1,4 @@
-const config = {
+var config = {
   apiKey: 'AIzaSyBw6HZ7Y4J1dATyC4-_mKmt3u0hLRRqthQ',
   authDomain: 'staywokesignups.firebaseapp.com',
   databaseURL: 'https://staywokesignups.firebaseio.com',
@@ -8,6 +8,15 @@ const config = {
 
 firebase.initializeApp(config)
 
+var animateCircle = function (circle) {
+  var rMin = 70000;
+  setInterval(function() {
+      var radius = circle.getRadius();
+      if (radius > rMin) {
+        circle.setRadius(radius - 500);
+      }
+  }, 10);
+}
 
 firebase.database().ref('/publicInfo/' + campaign.id).on('child_added' , function(snapshot){
   var ele = snapshot.val()
@@ -21,7 +30,8 @@ firebase.database().ref('/publicInfo/' + campaign.id).on('child_added' , functio
     fillOpacity: 0.35,
     map: map,
     center: latLng,
-    radius: 70000,
+    radius: 120000,
     animation: google.maps.Animation.DROP,
   })
+  animateCircle(marker);
 })
