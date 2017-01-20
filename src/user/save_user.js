@@ -75,11 +75,12 @@ module.exports = function saveUser({ user, source }) {
     makeCentralRequest(userData)
     .then(resolve, reject)
     //post to firebase
+    var firstname = userData.name.split(' ')[0]
     var newUser = firebasedb.ref('publicInfo/' + userData.campaign).push()
     return firebasedb.ref('/publicInfo/zips/' + user.zip.toString()).once('value').then(function(snapshot) {
-      console.log('sending:', userData.name, snapshot.val());
+      console.log('sending to firebase:', firstname);
       newUser.set({
-        name: userData.name,
+        name: firstname,
         zip: userData.zip,
         lat: snapshot.val().LAT,
         long: snapshot.val().LNG,

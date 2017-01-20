@@ -91,7 +91,7 @@
           </div>
           <div class="tab-pane container" id="atProtest" role="tabpanel">
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-md-3">
                 <div class="panel panel-primary">
                   <div class="panel-heading">
                     <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=38.8901&lon=-77.027&name=National Mall"> </iframe>
@@ -148,6 +148,10 @@
           </div>
         </section>
       </div>
+      <div class="page">
+        <h3>My Google Maps Demo</h3>
+        <div id="map"></div>
+      </div>
       <footer>
         <p>
           <a href="http://staywoke.org/">#StayWoke</a> |
@@ -161,9 +165,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-    <script src="./zipsToLatLong.js"></script>
-
-    <script src="./saveLatLong.js"></script>
 
     <script>
       // set the campaign once
@@ -185,6 +186,40 @@
         })
       })
 
+    </script>
+    <script>
+    var map
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var options = $.extend({
+          zoom:4,
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          draggable: false,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+          }, options);
+        map = new google.maps.Map(document.getElementById('map'), options);
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': 'US'}, function (results, status) {
+          map.setCenter(results[0].geometry.location);
+
+        //  var ne = results[0].geometry.viewport.getNorthEast();
+        //  var sw = results[0].geometry.viewport.getSouthWest();
+
+        //  map.fitBounds(results[0].geometry.viewport);
+      });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script src="./saveLatLong.js"></script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_1gaWM06y2_P1kbH4jTMi3zy6vJUYp1E&callback=initMap">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
   </body>

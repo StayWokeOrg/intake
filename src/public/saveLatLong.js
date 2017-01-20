@@ -11,16 +11,17 @@ var config = {
 function startFirebase(){
   firebase.initializeApp(config);
   var firebasedb = firebase.database()
-  latlong.forEach(function(ele) {
-    firebasedb.ref('publicInfo/zips/' + ele.ZIP ).set(ele)
-
-})
+  console.log(campaign.id);
+  return firebasedb.ref('/publicInfo/users/' + campaign.id).once('value').then(function(snapshot) {
+    $.each(snapshot.val(), function(index, ele) {
+    console.log(ele);
+      var coords = [ele.long, ele.lat];
+          var latLng = new google.maps.LatLng(coords[1],coords[0]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+            })
+      })
+    })
 }
-
 startFirebase();
-// $.get('./zipsToLatLong.json', function(data, message, xhr) {
-//       var latLong = (data);
-//
-//     }).then(startFirebase);
-
-// Initialize Firebase
