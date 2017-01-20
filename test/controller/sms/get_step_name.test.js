@@ -2,7 +2,7 @@ const chai = require('chai')
 const expect = chai.expect // eslint-disable-line
 const should = chai.should() // eslint-disable-line
 
-const getStepName = require('../../src/controller/sms/get_step_name')
+const getStepName = require('../../../src/controller/sms/get_step_name')
 
 describe('controller/sms/get_step_name:', function() {
   describe('#getStepName(session, steps)', function() {
