@@ -39,7 +39,7 @@
       new google.maps.LatLng(40, -124.39),
       new google.maps.LatLng(49.38, -66.94)
     )
-    
+
     map.fitBounds(bounds)
     var geocoder = new google.maps.Geocoder()
     geocoder.geocode({ 'address': 'US' }, function onGeocode(results, status) {
@@ -64,7 +64,7 @@
         if (radius > rMin) {
           circle.setRadius(radius - 500);
         }
-    }, 10);
+    }, 3);
   }
 
   firebase.database().ref('/publicInfo/' + window.campaign.id).on('child_added', function getSnapShot(snapshot) {
@@ -80,7 +80,7 @@
       fillOpacity: 0.35,
       map: map,
       center: latLng,
-      radius: 70000,
+      radius: 150000,
     })
     animateCircle(marker);
   })
