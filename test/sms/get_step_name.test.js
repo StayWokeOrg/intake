@@ -1,5 +1,3 @@
-/* eslint-disable func-names */
-
 const chai = require('chai')
 const expect = chai.expect // eslint-disable-line
 const should = chai.should() // eslint-disable-line
