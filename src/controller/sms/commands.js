@@ -20,6 +20,10 @@ const commands = {
   },
 
   'signup': (req, res) => {
+    // store their phone number
+    req.session.user.phone = req.body.From
+    // set their campaign id
+    req.session.user.campaign = 'inauguration'
     // set the flow name in the session
     req.session.flowName = 'signup'
     // delegate to the flow

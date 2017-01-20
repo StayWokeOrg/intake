@@ -2,6 +2,7 @@
 const message = require('../message')
 const saveUser = require('../../../user/save_user')
 const issues = require('../../../public/issues').issues
+const events = require('../schedule')
 const debug = require('debug')('sms')
 
 function notStarted(req, step) {
@@ -18,6 +19,14 @@ function markComplete(req, step) {
 }
 
 const validZip = /^\d{5}$/
+const startsWithY = /^y/i
+const containsYes = /(yes|yeah|ya)/i
+
+function isAffirmative(response) {
+  if (startsWithY.test(response)) return true
+  if (containsYes.test(response)) return true
+  return false
+}
 
 function validateZip(zip) {
   return validZip.test(zip) && zip
@@ -52,8 +61,6 @@ const steps = {
     } else {
       // trim the name and collapse multiple spaces
       req.session.user.name = req.body.Body.trim().replace(/ +/g, ' ')
-      // store their phone as well
-      req.session.user.phone = req.body.From
       // mark this step as complete
       markComplete(req, 'name')
       next()
@@ -118,7 +125,7 @@ const steps = {
       markStarted(req, 'issues')
 
       // construct the issues message
-      const greeting = 'Thanks! Are there particular issues that interest you?\n'
+      const greeting = 'Okay, are there particular issues that interest you?\n'
 
       const menu = (
         issues
@@ -153,30 +160,62 @@ const steps = {
       // update user.topics in the session
       req.session.user.topics = topics
 
+      // we have all the info we need
+      // save the user
+      debug('saving user', req.session.user)
+
+      saveUser({
+        user: req.session.user,
+        source: 'sms',
+      })
+      .then((data) => {
+        debug('save succeeded', data)
+      }, (reason) => {
+        debug('error', reason)
+      })
+
+      // don't need to wait for save to complete to proceed
       // mark this step as complete
       markComplete(req, 'issues')
       next()
     }
   },
 
-  'goodbye': (req, res, next) => {
-    const user = req.session.user
-    user.campaign = 'inauguration'
-    debug('saving user', user)
-
-    saveUser({
-      user,
-      source: 'sms',
-    })
-    .then((data) => {
-      // remove them from this flow
+  'schedule': (req, res, next) => {
+    if (notStarted(req, 'schedule')) {
+      markStarted(req, 'schedule')
+      res.send(message('Terrific. Are you interested in a schedule of upcoming protests? Say ‘yes’ or ‘skip’.'))
+    } else {
+      // remove the user from the flow once this response is sent
       delete req.session.flowName
-      res.send(message('Cool, thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾'))
-    }, (reason) => {
-      debug('error', reason)
-      res.send(message('Hmm, there was an error saving your info.'))
-    })
+
+      // mark this step completed as well
+      markComplete(req, 'schedule')
+
+      // trim the response
+      const response = req.body.Body.trim().toLowerCase()
+
+      // check the response
+      if (isAffirmative(response)) {
+        // send the schedule and say goodbye
+        const messages = [
+          'Here’s a list of upcoming protest events:',
+          ...events,
+          'You can visit https://in.staywoketech.org/inauguration.html for more info.',
+          'Thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾',
+        ]
+        res.send(message(...messages))
+      } else {
+        // say goodbye
+        res.send(message('Cool, thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾'))
+      }
+    }
   },
+
+  'postsignup': (req, res, next) => {
+    res.send(message('You’re already signed up! ✊🏾'))
+  },
+
 }
 
 module.exports = steps
