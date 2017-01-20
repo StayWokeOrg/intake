@@ -1,17 +1,23 @@
 /* eslint-disable no-param-reassign */
 const message = require('./message')
 const flows = require('./flows')
+const events = require('./schedule')
 const debug = require('debug')('sms') // eslint-disable-line
 
 // note: please use ‘real’ apostrophes instead of \'
 // on a mac: option-] and option-shift-]
 
+
 const commands = {
 
-  // disabled until we have content
-  // 'schedule': (req, res) => {
-  //   res.send(message('Here’s a schedule!'))
-  // },
+  'schedule': (req, res) => {
+    const messages = [
+      'Here’s a list of upcoming protest events:',
+      ...events,
+      'You can visit https://in.staywoketech.org/inauguration.html for more info. Stay woke. ✊🏾',
+    ]
+    res.send(message(...messages))
+  },
 
   'signup': (req, res) => {
     // set the flow name in the session
