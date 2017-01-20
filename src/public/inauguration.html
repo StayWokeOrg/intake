@@ -46,6 +46,14 @@
             </ul>
           </div>
         </section>
+        <section class="scroll-to-form text-center">
+            <p>
+              <a href="#membermap" class="scroll-button btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                <span>Member's Map</span>
+              </a>
+            </p>
+        </section>
         <section class="tab-content">
           <div class="tab-pane container active" id="planning" role="tabpanel">
             <div class="row">
@@ -93,7 +101,7 @@
           </div>
           <div class="tab-pane container" id="atProtest" role="tabpanel">
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-md-3">
                 <div class="panel panel-primary">
                   <div class="panel-heading">
                     <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="https://forecast.io/embed/#lat=38.8901&lon=-77.027&name=National Mall"> </iframe>
@@ -150,6 +158,17 @@
           </div>
         </section>
       </div>
+      <div class="page map">
+        <a name="membermap" id="membermap"></a>
+        <div class="panel panel-primary">
+          <div class="panel-heading ">
+            <h4 class="text-center balance-text">Where our members are from</h4>
+          </div>
+          <div class="panel-body">
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
       <footer>
         <p>
           <a href="http://staywoke.org/">#StayWoke</a> |
@@ -163,6 +182,8 @@
     <script src="./bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
     <script>
       // set the campaign once
       var campaign = inauguration
@@ -182,6 +203,64 @@
           location.hash = this.getAttribute('href')
         })
       })
+    </script>
+
+    <script>
+    var map
+      function initMap() {
+        var styleArray = [
+          {
+            featureType: 'all',
+            stylers: [
+              { saturation: -80 }
+            ]
+          },{
+            featureType: 'road.arterial',
+            elementType: 'geometry',
+            stylers: [
+              { hue: '#00ffee' },
+              { saturation: 50 }
+            ]
+          },{
+            featureType: 'poi.business',
+            elementType: 'labels',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          }
+        ];
+        var options = $.extend({
+          zoom:4,
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          styles: styleArray,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+          }, options);
+        map = new google.maps.Map(document.getElementById('map'), options);
+        var bounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(40, -124.39),
+        new google.maps.LatLng(49.38, -66.94)
+      );
+
+        map.fitBounds(bounds);
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': 'US'}, function (results, status) {
+          map.setCenter(results[0].geometry.location);
+          google.maps.event.addDomListener(window, 'resize', function() {
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(results[0].geometry.location);
+            map.fitBounds(bounds);
+
+
+          });
+      });
+    }
+    </script>
+    <script src="./mapUsers.js"></script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_1gaWM06y2_P1kbH4jTMi3zy6vJUYp1E&callback=initMap&libraries=visualization">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
   </body>
