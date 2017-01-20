@@ -53,6 +53,7 @@ CampaignView.prototype = {
 // campaign data object, used on both pages
 var inauguration = {
   id: 'inauguration',
+  sms_keyword: 'ready',
   name: '(Anti) Inauguration',
   number: NUMBER,
   description: 'Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
