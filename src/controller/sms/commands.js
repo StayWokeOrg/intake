@@ -8,9 +8,10 @@ const debug = require('debug')('sms') // eslint-disable-line
 
 const commands = {
 
-  'schedule': (req, res) => {
-    res.send(message('Here’s a schedule!'))
-  },
+  // disabled until we have content
+  // 'schedule': (req, res) => {
+  //   res.send(message('Here’s a schedule!'))
+  // },
 
   'signup': (req, res) => {
     // set the flow name in the session
