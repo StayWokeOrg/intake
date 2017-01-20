@@ -15,7 +15,7 @@ describe('controller/sms/message:', () => {
     })
     describe('with two items', () => {
       it('should return a response with two messages', () => {
-        const expected = '<Response><Message>item1</Message><Message>item2</Message></Response>'
+        const expected = '<Response><Message>item1\n\nitem2</Message></Response>'
         message('item1', 'item2').should.equal(expected)
       })
     })
