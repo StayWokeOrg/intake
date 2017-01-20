@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 const message = require('../message')
 const saveUser = require('../../../user/save_user')
+const getSchedule = require('../get_schedule')
 const issues = require('../../../public/issues').issues
-const events = require('../schedule')
 const debug = require('debug')('sms')
 
 function notStarted(req, step) {
@@ -31,6 +31,7 @@ function isAffirmative(response) {
 function validateZip(zip) {
   return validZip.test(zip) && zip
 }
+
 
 /**
 list of steps for the SMS signup flow.
@@ -184,7 +185,7 @@ const steps = {
   'schedule': (req, res, next) => {
     if (notStarted(req, 'schedule')) {
       markStarted(req, 'schedule')
-      res.send(message('Terrific. Are you interested in a schedule of upcoming protests? Say ‘yes’ or ‘skip’.'))
+      res.send(message('Terrific. Will you be in DC today or tomorrow? We can send you a few resources. Say ‘yes’ or ‘skip’.'))
     } else {
       // remove the user from the flow once this response is sent
       delete req.session.flowName
@@ -197,13 +198,16 @@ const steps = {
 
       // check the response
       if (isAffirmative(response)) {
-        // send the schedule and say goodbye
+        // send the info and say goodbye
+
+        const schedule = getSchedule()
+
         const messages = [
-          'Here’s a list of upcoming protest events:',
-          ...events,
-          'You can visit https://in.staywoketech.org/inauguration.html for more info.',
+          `Great! ${schedule.slice(0, 1)}`,
+          ...schedule.slice(1),
           'Thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾',
         ]
+
         res.send(message(...messages))
       } else {
         // say goodbye

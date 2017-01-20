@@ -1,18 +1,9 @@
-/* env browser */
-/* global window */
-/* eslint-disable strict */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
-/* eslint-disable no-unused-vars */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-throw-literal */
 (function closure($) {
   'use strict'
 
   // form validation vars
   var $form = $('.intake form')
   var $name = $('#name')
-  var $email = $('#email')
 
   // reference all required inputs on the page
   var $requiredFields = $('input[required]')
@@ -84,11 +75,11 @@
     validateField(this)
   })
 
-  $form.on('submit', (e) => {
+  $form.on('submit', function onSubmit(e) {
     // safari doesn't validate on submit, hence the dance here
     // https://bugs.webkit.org/show_bug.cgi?id=164382 >:(
     if (!nativeValidation || !$form[0].checkValidity()) {
-      $requiredFields.each((i, required) => {
+      $requiredFields.each(function forEach(i, required) {
         validateField(required)
       })
 
