@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 const message = require('./message')
 const flows = require('./flows')
-const events = require('./schedule')
+const getSchedule = require('./get_schedule')
 const debug = require('debug')('sms') // eslint-disable-line
 
 // note: please use ‘real’ apostrophes instead of \'
@@ -11,11 +11,14 @@ const debug = require('debug')('sms') // eslint-disable-line
 const commands = {
 
   'schedule': (req, res) => {
+    const schedule = getSchedule()
+
     const messages = [
-      'Here’s a list of upcoming protest events:',
-      ...events,
-      'You can visit https://in.staywoketech.org/inauguration.html for more info. Stay woke. ✊🏾',
+      `Hi there! ${schedule.slice(0, 1)}`,
+      ...schedule.slice(1),
+      'Stay woke. ✊🏾',
     ]
+
     res.send(message(...messages))
   },
 
