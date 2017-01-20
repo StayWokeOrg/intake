@@ -23,6 +23,15 @@ const config = {
     'prefer-arrow-callback': [
       OFF,
     ],
+    'prefer-template': [
+      OFF,
+    ],
+    'comma-dangle': [
+      OFF,
+    ],
+    'object-shorthand': [
+      OFF,
+    ],
   }
 }
 
