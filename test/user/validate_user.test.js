@@ -5,7 +5,7 @@ const should = chai.should() // eslint-disable-line
 
 const validateUser = require('../../src/user/validate_user')
 
-describe('validate_user:', () => {
+describe('user/validate_user:', () => {
   describe('#validateUser()', () => {
     function makeUser() {
       const user = {
