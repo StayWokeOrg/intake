@@ -6,7 +6,7 @@ const should = chai.should() // eslint-disable-line
 const validateCampaign = require('../../src/user/validate_campaign')
 const validCampaigns = require('../../src/user/valid_campaigns')
 
-describe('validate_campaign:', () => {
+describe('user/validate_campaign:', () => {
   describe('#validateCampaign()', () => {
     const invalidExamples = [
       { value: null, description: 'null', expected: false },

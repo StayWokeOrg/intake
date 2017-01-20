@@ -15,6 +15,7 @@ module.exports = function encodeUser({ user, campaign, source }) {
     email: user.email,
     phone: user.phone,
     zip: user.zip,
+    topics: user.topics,
     campaign,
     source,
   }

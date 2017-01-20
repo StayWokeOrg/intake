@@ -41,13 +41,19 @@ CampaignView.prototype = {
   // insert rendered html into a dom node
   renderTo: function renderTo(selector) {
     $(selector).html(this.toHtml())
-  }
+  },
+
+  // append rendered html into a dom node
+  appendTo: function appendTo(selector) {
+    $(selector).append(this.toHtml())
+  },
 
 }
 
 // campaign data object, used on both pages
 var inauguration = {
-  id: 'ready',
+  id: 'inauguration',
+  sms_keyword: 'ready',
   name: '(Anti) Inauguration',
   number: NUMBER,
   description: 'Already public pressure has reversed the Republican Party’s attempt to gut the ethics committee, but we cannot back down now. We are the majority. We are the resistance.',
