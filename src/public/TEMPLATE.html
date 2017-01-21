@@ -3,25 +3,19 @@
 
   <head>
     <meta charset="utf-8">
-    <title>#StayWoke - Success</title>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>#StayWoke - Get Involved</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900" rel="stylesheet">
-    <script id="success-info-template" type="text/x-handlebars-template">
-      <h2 class="text-center balance-text">You are now a member of the {{name}} campaign!</h1>
-      <p class="text-center balance-text">Thanks for getting involved! We’ll let you know when there are actions happening in your area.</p>
-      {{#if url}}
-      <h4 class="text-center balance-text"><a href="{{url}}">Visit the {{name}} page</a></h4>
-      {{/if}}
-    </script>
+    <!-- templates here -->
     <link rel="stylesheet" href="./build/styles.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
   </head>
 
   <body>
     <div class="pages">
-      <div class="page page1">
+      <div class="page">
         <header>
           <div class="container">
             <div class="row">
@@ -31,37 +25,20 @@
             </div>
           </div>
         </header>
-        <section>
-          <div class="container">
-            <div class="row">
-              <h1 class="text-center balance-text thank-you-header">Thank you for taking action!</h1>
-            </div>
-          </div>
-        </section>
         <section class="shadowed">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2 success-info"></div>
-            </div>
-          </div>
+          <h1 class="text-center">Page Header</h1>
         </section>
-        <section class="quote">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                <blockquote class="balance-text">
-                  Life, liberty, and the pursuit of happiness… while self-evident, have never been self-executing.
-                  <small>Barack Obama</small>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </section>
+        <!-- more sections here -->
       </div>
+
+      <!-- more pages here (optional) -->
+      <!-- probably you just want to add more sections to the first page ^ -->
+
       <footer>
         <p>
           <a href="http://staywoke.org/">#StayWoke</a> |
-          <a href="https://www.joincampaignzero.org/">CampaignZero</a>
+          <a href="https://www.joincampaignzero.org/">CampaignZero</a> |
+          <a href="privacy-policy.html">Privacy Policy</a>
         </p>
       </footer>
     </div>
@@ -69,13 +46,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" integrity="sha256-1O3BtOwnPyyRzOszK6P+gqaRoXHV6JXj8HkjZmPYhCI=" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
-    <script>
-      var view = new CampaignView({
-        templateId: '#success-info-template',
-        data: inauguration
-      })
-      view.renderTo('.success-info')
-    </script>
+
+    <!-- page-specific scripts here -->
+
+    <script src="./form-validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/balance-text/2.0.0/jquery.balancetext.min.js" integrity="sha256-dawSXzOu4BcrV9VEytfVY0XUcZMrrfjvkKWg75FYPrA=" crossorigin="anonymous"></script>
 
     <script>
