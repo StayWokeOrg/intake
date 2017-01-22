@@ -13,11 +13,10 @@ const compression = require('compression')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
-const session = require('express-session')
-const MemoryStore = require('session-memory-store')(session)
 const debug = require('debug')('app') // eslint-disable-line
 const favicon = require('serve-favicon')
 const enforce = require('express-sslify')
+const cookieSession = require('cookie-session')
 
 if (!process.env.PORT) {
   console.log('Please `cp example_dot_env .env` to create your .env file.')
@@ -35,6 +34,7 @@ if (app.get('env') === 'production') {
   // redirect http requests to https
   // use trustProtoHeader: true when behind load balancer/reverse proxy
   app.use(enforce.HTTPS({ trustProtoHeader: true }))
+  app.set('trust proxy', 1)
 
   // production error handler
   app.use((err, req, res, next) => {
@@ -44,11 +44,11 @@ if (app.get('env') === 'production') {
 }
 
 app.use(helmet())
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  store: new MemoryStore(),
+app.use(cookieSession({
+    name: 'session',
+    secret: process.env.SESSION_SECRET,
+    maxAge: 24 * 60 * 60 * 1000,
+    overwrite: true
 }))
 app.use(compression())
 app.use(logger('combined'))
