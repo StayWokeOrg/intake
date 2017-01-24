@@ -76,17 +76,19 @@ module.exports = function saveUser({ user, source }) {
     makeCentralRequest(userData)
     .then(resolve, reject)
 
-    // post to firebase
-    const firstname = userData.name.split(' ')[0]
-    const newUser = firebasedb.ref(`publicInfo/${userData.campaign}`).push()
-    return firebasedb.ref(`/publicInfo/zips/${user.zip.toString()}`).once('value').then((snapshot) => {
-      debug('sending to firebase:', firstname)
-      newUser.set({
-        name: firstname,
-        zip: userData.zip,
-        lat: snapshot.val().LAT,
-        long: snapshot.val().LNG,
+    if (userData.zip) {
+      // post to firebase
+      const firstname = userData.name.split(' ')[0]
+      const newUser = firebasedb.ref(`publicInfo/${userData.campaign}`).push()
+      return firebasedb.ref(`/publicInfo/zips/${userData.zip.toString()}`).once('value').then((snapshot) => {
+        debug('sending to firebase:', firstname)
+        newUser.set({
+          name: firstname,
+          zip: userData.zip,
+          lat: snapshot.val().LAT,
+          long: snapshot.val().LNG,
+        })
       })
-    })
+    }
   })
 }
