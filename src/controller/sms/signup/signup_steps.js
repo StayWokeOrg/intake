@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 const message = require('../message')
 const saveUser = require('../../../user/save_user')
-const getSchedule = require('../get_schedule')
 const issues = require('../../../public/issues').issues
 const debug = require('debug')('sms')
 
@@ -19,14 +18,14 @@ function markComplete(req, step) {
 }
 
 const validZip = /^\d{5}$/
-const startsWithY = /^y/i
-const containsYes = /(yes|yeah|ya)/i
 
-function isAffirmative(response) {
-  if (startsWithY.test(response)) return true
-  if (containsYes.test(response)) return true
-  return false
-}
+// const startsWithY = /^y/i
+// const containsYes = /(yes|yeah|ya)/i
+// function isAffirmative(response) {
+//   if (startsWithY.test(response)) return true
+//   if (containsYes.test(response)) return true
+//   return false
+// }
 
 function validateZip(zip) {
   return validZip.test(zip) && zip
@@ -182,38 +181,15 @@ const steps = {
     }
   },
 
-  'schedule': (req, res, next) => {
-    if (notStarted(req, 'schedule')) {
-      markStarted(req, 'schedule')
-      res.send(message('Terrific. Will you be in DC today or tomorrow? We can send you a few resources. Say ‘yes’ or ‘skip’.'))
-    } else {
-      // remove the user from the flow once this response is sent
-      delete req.session.flowName
+  'goodbye': (req, res, next) => {
+    // remove the user from the flow once this response is sent
+    delete req.session.flowName
 
-      // mark this step completed as well
-      markComplete(req, 'schedule')
+    // mark this step completed as well
+    markComplete(req, 'goodbye')
 
-      // trim the response
-      const response = req.body.Body.trim().toLowerCase()
-
-      // check the response
-      if (isAffirmative(response)) {
-        // send the info and say goodbye
-
-        const schedule = getSchedule()
-
-        const messages = [
-          `Great! ${schedule.slice(0, 1)}`,
-          ...schedule.slice(1),
-          'Thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾',
-        ]
-
-        res.send(message(...messages))
-      } else {
-        // say goodbye
-        res.send(message('Cool, thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾'))
-      }
-    }
+    // say goodbye
+    res.send(message('Cool, thanks for getting involved! We’ll be in touch soon with concrete actions you can take. Stay woke. ✊🏾'))
   },
 
   'postsignup': (req, res, next) => {
