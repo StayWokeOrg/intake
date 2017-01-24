@@ -45,12 +45,12 @@ if (app.get('env') === 'production') {
 
 app.use(helmet())
 app.use(cookieSession({
-    name: 'session',
-    secret: process.env.SESSION_SECRET,
-    maxAge: 24 * 60 * 60 * 1000,
-    overwrite: true,
-    signed: false,
-    httpOnly: false
+  name: 'session',
+  secret: process.env.SESSION_SECRET,
+  maxAge: 24 * 60 * 60 * 1000,
+  overwrite: true,
+  signed: false,
+  httpOnly: false,
 }))
 app.use(compression())
 app.use(logger('combined'))
