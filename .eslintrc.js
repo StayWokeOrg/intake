@@ -26,5 +26,8 @@ module.exports = {
     'consistent-return': [
       OFF,
     ],
+    'import/newline-after-import': [
+      OFF,
+    ],
   },
 }

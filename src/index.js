@@ -1,20 +1,21 @@
 /* eslint-disable no-console */
-const dotenv = require('dotenv')
 
 // Load environment variables from .env file
 // need to do this before initializing other modules (e.g. debug)
+const dotenv = require('dotenv')
 dotenv.load()
 
 const express = require('express')
 const path = require('path')
 const helmet = require('helmet')
+const session = require('express-session')
+const createMemoryStore = require('session-memory-store')
+const createMemcachedStore = require('connect-memcached')
 const logger = require('morgan')
 const compression = require('compression')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
-const session = require('express-session')
-const MemoryStore = require('session-memory-store')(session)
 const debug = require('debug')('app') // eslint-disable-line
 const favicon = require('serve-favicon')
 const enforce = require('express-sslify')
@@ -27,11 +28,14 @@ if (!process.env.PORT) {
 
 const app = express()
 
-app.set('view engine', 'html')
+const PRODUCTION = (app.get('env') === 'production')
+
 app.set('port', process.env.PORT)
 
+app.set('view engine', 'html')
+
 // production middleware
-if (app.get('env') === 'production') {
+if (PRODUCTION) {
   // redirect http requests to https
   // use trustProtoHeader: true when behind load balancer/reverse proxy
   app.use(enforce.HTTPS({ trustProtoHeader: true }))
@@ -43,13 +47,30 @@ if (app.get('env') === 'production') {
   })
 }
 
+// protected headers
 app.use(helmet())
+
+// session store
+let store
+if (true || process.env.USE_MEMCACHED) {
+  const MemcachedStore = createMemcachedStore(session)
+  store = new MemcachedStore({
+    hosts: ['127.0.0.1:11212'],
+  })
+} else {
+  const MemoryStore = createMemoryStore(session)
+  store = new MemoryStore()
+}
+debug('store', store)
+
+// session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  store: new MemoryStore(),
+  store,
 }))
+
 app.use(compression())
 app.use(logger('combined'))
 app.use(bodyParser.json())

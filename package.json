@@ -28,6 +28,8 @@
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
     "compression": "^1.6.2",
+    "connect-memcached": "^0.2.0",
+    "cookie-session": "1.2.0",
     "debug": "^2.6.0",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
