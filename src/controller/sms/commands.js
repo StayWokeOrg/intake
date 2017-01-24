@@ -70,9 +70,7 @@ if (process.env.NODE_ENV !== 'production') {
       res.send(message(JSON.stringify(req.session.user)))
     },
     'clear': (req, res) => {
-      req.session.user = null
-      req.session.steps = null
-      req.session.flowName = null
+      req.session = null
       res.send(message('Session cleared.'))
     },
   })
